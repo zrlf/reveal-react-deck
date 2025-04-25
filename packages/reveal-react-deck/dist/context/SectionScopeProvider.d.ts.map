@@ -1,0 +1,1 @@
+{"version":3,"file":"SectionScopeProvider.d.ts","sourceRoot":"","sources":["../../src/context/SectionScopeProvider.tsx"],"names":[],"mappings":"AAUA,QAAA,MAAM,oBAAoB,EAAE,KAAK,CAAC,EAAE,CAClC,KAAK,CAAC,iBAAiB,CAAC,KAAK,CAAC,cAAc,CAAC,WAAW,CAAC,CAAC,CAuD3D,CAAC;AAGF,QAAA,MAAM,iBAAiB;;;;CAAmC,CAAC;AAE3D,OAAO,EAAE,oBAAoB,EAAE,iBAAiB,EAAE,CAAC"}
