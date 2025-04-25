@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "reveal.js/dist/reveal.css";
+@import "reveal-react-deck/css/preset.css";
+
+@source "../node_modules/reveal-react-deck/"
