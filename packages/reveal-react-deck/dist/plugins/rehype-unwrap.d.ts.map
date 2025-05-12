@@ -1,1 +1,1 @@
-{"version":3,"file":"rehype-unwrap.d.ts","sourceRoot":"","sources":["../../src/plugins/rehype-unwrap.js"],"names":[],"mappings":"AAEA,kDACU,SAAI,UAqCb"}
+{"version":3,"file":"rehype-unwrap.d.ts","sourceRoot":"","sources":["../../src/plugins/rehype-unwrap.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,OAAO,UAAU,qBAAqB,KACnC,SAAI,UAqCb"}

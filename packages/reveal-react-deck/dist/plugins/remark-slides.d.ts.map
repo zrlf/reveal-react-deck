@@ -1,1 +1,1 @@
-{"version":3,"file":"remark-slides.d.ts","sourceRoot":"","sources":["../../src/plugins/remark-slides.js"],"names":[],"mappings":";AAGA,kCACU,SAAI,UAqGb"}
+{"version":3,"file":"remark-slides.d.ts","sourceRoot":"","sources":["../../src/plugins/remark-slides.ts"],"names":[],"mappings":"AAGA,iBAAS,YAAY,KACX,MAAM,GAAG,UAqGlB;AAED,eAAe,YAAY,CAAC"}

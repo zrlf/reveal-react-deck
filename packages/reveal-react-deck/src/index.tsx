@@ -4,9 +4,6 @@ import { MDXProvider } from "@mdx-js/react";
 import Reveal from "reveal.js";
 import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "@/components";
-
-import "katex/dist/katex.css";
-import { Slide } from "./components/Slide";
 import { Options } from "./config";
 
 interface RevealEvent extends Event {

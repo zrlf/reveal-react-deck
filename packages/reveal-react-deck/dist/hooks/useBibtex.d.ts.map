@@ -1,0 +1,1 @@
+{"version":3,"file":"useBibtex.d.ts","sourceRoot":"","sources":["../../src/hooks/useBibtex.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAgB,MAAM,QAAQ,CAAC;AAKxD,UAAU,QAAQ;IAChB,IAAI,EAAE,gBAAgB,GAAG,IAAI,CAAC;IAC9B,YAAY,EAAE,CAAC,GAAG,EAAE,MAAM,KAAK,IAAI,CAAC;CACrC;AAED,QAAA,MAAM,WAAW,uEAsBd,CAAC;AAEJ,OAAO,EAAE,WAAW,EAAE,CAAC"}

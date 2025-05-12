@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"packages": "link:packages",
+		"reveal-react-deck": "link:packages/reveal-react-deck"
+	}
+}

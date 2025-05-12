@@ -14,7 +14,19 @@ declare const mdxComponents: (options: Options) => {
     DummyFragments: ({ n }: {
         n: number;
     }) => import("react/jsx-runtime").JSX.Element;
+    Conclusion: ({ children, fragment, className, }: {
+        children: React.ReactNode;
+        fragment?: boolean;
+        className: string;
+    }) => import("react/jsx-runtime").JSX.Element;
+    Card: ({ children, className, ...props }: {
+        children: React.ReactNode;
+    } & React.ComponentProps<"div">) => import("react/jsx-runtime").JSX.Element;
+    Refs: ({ refs }: {
+        refs: string[];
+    }) => import("react/jsx-runtime").JSX.Element;
     code: (props: any) => import("react/jsx-runtime").JSX.Element;
+    img: (props: any) => import("react/jsx-runtime").JSX.Element;
 };
 export default mdxComponents;
 //# sourceMappingURL=index.d.ts.map

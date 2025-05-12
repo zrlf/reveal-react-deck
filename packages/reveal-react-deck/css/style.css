@@ -1,8 +1,7 @@
-@import "tailwindcss";
-
 @theme {
   --color-foreground: #000000;
-  --color-background: #ffffff;
+  --color-background: #e2e2e2;
+  --color-muted: color-mix(in oklab, var(--color-foreground), transparent 80%);
 
   --color-primary: #215caf;
   --color-primary-50: #f2f6fd;

@@ -1,20 +1,14 @@
-// import { cn } from "@/utils";
-// import { normalizeFieldValue } from "bibtex";
-import { MDXComponents } from "mdx/types";
-import React, { isValidElement, useCallback, useEffect } from "react";
+import React, { isValidElement, useCallback } from "react";
 import { Slide } from "./Slide";
 import { Options } from "@/config";
 import { Footer, Header } from "./Header";
 import Video from "./Video";
 import OnFragment from "./OnFragment";
 import { DummyFragments } from "./DummyFragment";
-// import { Conclusion } from "./components/Conclusion";
-// import { Footer, Header } from "./components/Footer";
-// import { OnFragment } from "./components/OnFragment";
-// import { useSectionContext } from "./hooks/SectionScopeProvider";
-// import { useBibStore } from "./hooks/useBibtex";
-// import { Options } from "./types";
-// import { ImageRow } from "./components/ImageRow";
+import { Conclusion } from "./Conclusion";
+import { Card } from "./Card";
+import { Refs } from "./Refs";
+import { Image } from "./Image";
 
 export { SlideNumber } from "./SlideNumber";
 
@@ -40,9 +34,13 @@ const mdxComponents = (options: Options) => {
     Video,
     OnFragment,
     DummyFragments,
+    Conclusion,
+    Card,
+    Refs,
     code: (props: any) => {
       return <code {...props} className={`language-${props.className}`} />;
     },
+    img: Image,
   };
 
   return { ...components };

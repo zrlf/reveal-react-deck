@@ -2,10 +2,10 @@ import yaml from "js-yaml";
 import { valueToEstree } from "estree-util-value-to-estree";
 
 function remarkSlides() {
-  return (tree) => {
-    const slides = [];
-    const esmNodes = [];
-    let currentSlide = null;
+  return (tree: any) => {
+    const slides: Array<any> = [];
+    const esmNodes: Array<any> = [];
+    let currentSlide: { frontmatter: yaml; children: any } | null = null;
 
     // Iterate over the tree's children nodes
     for (let index = 0; index < tree.children.length; index++) {

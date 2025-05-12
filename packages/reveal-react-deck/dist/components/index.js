@@ -5,13 +5,10 @@ import { Footer, Header } from "./Header.js";
 import Video from "./Video.js";
 import OnFragment from "./OnFragment.js";
 import { DummyFragments } from "./DummyFragment.js";
-// import { Conclusion } from "./components/Conclusion";
-// import { Footer, Header } from "./components/Footer";
-// import { OnFragment } from "./components/OnFragment";
-// import { useSectionContext } from "./hooks/SectionScopeProvider";
-// import { useBibStore } from "./hooks/useBibtex";
-// import { Options } from "./types";
-// import { ImageRow } from "./components/ImageRow";
+import { Conclusion } from "./Conclusion.js";
+import { Card } from "./Card.js";
+import { Refs } from "./Refs.js";
+import { Image } from "./Image.js";
 export { SlideNumber } from "./SlideNumber.js";
 const mdxComponents = (options) => {
     const footer = options.footer
@@ -32,9 +29,13 @@ const mdxComponents = (options) => {
         Video,
         OnFragment,
         DummyFragments,
+        Conclusion,
+        Card,
+        Refs,
         code: (props) => {
             return _jsx("code", { ...props, className: `language-${props.className}` });
         },
+        img: Image,
     };
     return { ...components };
 };

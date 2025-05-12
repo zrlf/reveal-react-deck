@@ -5,7 +5,6 @@ import { MDXProvider } from "@mdx-js/react";
 import Reveal from "reveal.js";
 import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "./components/index.js";
-import "katex/dist/katex.css";
 const Slides = ({ slides, revealRef, }) => {
     const currentSlide = useDeckStore().currentSlide;
     const currentFragment = useDeckStore().currentFragment;

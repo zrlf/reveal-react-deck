@@ -9,7 +9,6 @@ yarn-error.log*
 ~/.npmrc
 .npmrc
 
-dist
 src/packages/package-a/src/version.js
 
 # Runtime data

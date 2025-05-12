@@ -1,5 +1,4 @@
 import Reveal from "reveal.js";
-import "katex/dist/katex.css";
 import { Options } from "./config.js";
 export interface SlideFile {
     default: React.FC;
