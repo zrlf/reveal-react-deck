@@ -1,8 +1,8 @@
 import React from "react";
 import { Options } from "../config.js";
+import { Img } from "./Img.js";
 export { SlideNumber } from "./SlideNumber.js";
-declare const mdxComponents: (options: Options) => {
-    Slide: (props: any) => import("react/jsx-runtime").JSX.Element;
+declare const components: {
     Video: ({ playOnFragment, playbackRate, ...props }: React.VideoHTMLAttributes<HTMLVideoElement> & {
         playOnFragment?: number;
         playbackRate?: number;
@@ -18,15 +18,57 @@ declare const mdxComponents: (options: Options) => {
         children: React.ReactNode;
         fragment?: boolean;
         className: string;
-    }) => import("react/jsx-runtime").JSX.Element;
+    }) => React.ReactPortal | null;
+    Overlay: ({ children, variant, fragment, className, }: {
+        children: React.ReactNode;
+        variant?: "none" | "conclusion" | "centered";
+        fragment?: boolean;
+        className: string;
+    }) => React.ReactPortal | null;
     Card: ({ children, className, ...props }: {
         children: React.ReactNode;
     } & React.ComponentProps<"div">) => import("react/jsx-runtime").JSX.Element;
-    Refs: ({ refs }: {
-        refs: string[];
+    Ref: ({ id }: {
+        id: string;
     }) => import("react/jsx-runtime").JSX.Element;
     code: (props: any) => import("react/jsx-runtime").JSX.Element;
     img: (props: any) => import("react/jsx-runtime").JSX.Element;
+    Img: typeof Img;
+};
+export type MDXProvidedComponents = typeof components;
+declare const mdxComponents: (options: Options) => {
+    Video: ({ playOnFragment, playbackRate, ...props }: React.VideoHTMLAttributes<HTMLVideoElement> & {
+        playOnFragment?: number;
+        playbackRate?: number;
+    }) => import("react/jsx-runtime").JSX.Element;
+    OnFragment: ({ children, fragmentNumber, }: {
+        children: React.ReactNode;
+        fragmentNumber: number;
+    }) => import("react/jsx-runtime").JSX.Element | null;
+    DummyFragments: ({ n }: {
+        n: number;
+    }) => import("react/jsx-runtime").JSX.Element;
+    Conclusion: ({ children, fragment, className, }: {
+        children: React.ReactNode;
+        fragment?: boolean;
+        className: string;
+    }) => React.ReactPortal | null;
+    Overlay: ({ children, variant, fragment, className, }: {
+        children: React.ReactNode;
+        variant?: "none" | "conclusion" | "centered";
+        fragment?: boolean;
+        className: string;
+    }) => React.ReactPortal | null;
+    Card: ({ children, className, ...props }: {
+        children: React.ReactNode;
+    } & React.ComponentProps<"div">) => import("react/jsx-runtime").JSX.Element;
+    Ref: ({ id }: {
+        id: string;
+    }) => import("react/jsx-runtime").JSX.Element;
+    code: (props: any) => import("react/jsx-runtime").JSX.Element;
+    img: (props: any) => import("react/jsx-runtime").JSX.Element;
+    Img: typeof Img;
+    Slide: (props: any) => import("react/jsx-runtime").JSX.Element;
 };
 export default mdxComponents;
 //# sourceMappingURL=index.d.ts.map

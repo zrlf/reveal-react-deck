@@ -7,9 +7,24 @@ import OnFragment from "./OnFragment.js";
 import { DummyFragments } from "./DummyFragment.js";
 import { Conclusion } from "./Conclusion.js";
 import { Card } from "./Card.js";
-import { Refs } from "./Refs.js";
-import { Image } from "./Image.js";
+import { Ref } from "./Refs.js";
+import { Img, ImgHTML } from "./Img.js";
+import { Overlay } from "./Overlay.js";
 export { SlideNumber } from "./SlideNumber.js";
+const components = {
+    Video,
+    OnFragment,
+    DummyFragments,
+    Conclusion,
+    Overlay,
+    Card,
+    Ref,
+    code: (props) => {
+        return _jsx("code", { ...props, className: `language-${props.className}` });
+    },
+    img: ImgHTML,
+    Img,
+};
 const mdxComponents = (options) => {
     const footer = options.footer
         ? isValidElement(options.footer)
@@ -24,19 +39,10 @@ const mdxComponents = (options) => {
     const SlideWrapWithFooter = useCallback((props) => {
         return _jsx(Slide, { ...props, footer: footer, header: header });
     }, []);
-    const components = {
+    const __components = {
         Slide: SlideWrapWithFooter,
-        Video,
-        OnFragment,
-        DummyFragments,
-        Conclusion,
-        Card,
-        Refs,
-        code: (props) => {
-            return _jsx("code", { ...props, className: `language-${props.className}` });
-        },
-        img: Image,
+        ...components,
     };
-    return { ...components };
+    return { ...__components };
 };
 export default mdxComponents;

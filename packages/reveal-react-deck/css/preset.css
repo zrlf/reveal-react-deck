@@ -169,7 +169,7 @@ body {
   /* Slide title  */
   /* -------------- */
   [data-slide-title] {
-    @apply fixed z-10 pb-1 h-[var(--title-bar-height)] px-[var(--slide-margin)] w-full flex items-center leading-none;
+    @apply fixed z-20 pb-1 h-[var(--title-bar-height)] px-[var(--slide-margin)] w-full flex items-center leading-none;
 
     &>div {
       @apply flex items-baseline mt-1;
@@ -222,7 +222,7 @@ body {
   inset: 0;
   content: "";
   border: 2px dashed var(--foreground);
-  z-index: 10;
+  z-index: 50;
 }
 
 /* Slide layouts */
@@ -411,12 +411,12 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title]) pr
   @apply !rounded-t-none;
 }
 
-figure {
+figure[data-rehype-pretty-code-figure] {
   @apply mb-6 mt-1;
 }
 
 pre,
 code,
-figure {
+figure[data-rehype-pretty-code-figure] {
   @apply overflow-x-auto;
 }

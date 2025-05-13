@@ -1,16 +1,34 @@
 import React, { isValidElement, useCallback } from "react";
-import { Slide } from "./Slide";
 import { Options } from "@/config";
+import { Slide } from "./Slide";
 import { Footer, Header } from "./Header";
 import Video from "./Video";
 import OnFragment from "./OnFragment";
 import { DummyFragments } from "./DummyFragment";
 import { Conclusion } from "./Conclusion";
 import { Card } from "./Card";
-import { Refs } from "./Refs";
-import { Image } from "./Image";
+import { Ref } from "./Refs";
+import { Img, ImgHTML } from "./Img";
+import { Overlay } from "./Overlay";
 
 export { SlideNumber } from "./SlideNumber";
+
+const components = {
+  Video,
+  OnFragment,
+  DummyFragments,
+  Conclusion,
+  Overlay,
+  Card,
+  Ref,
+  code: (props: any) => {
+    return <code {...props} className={`language-${props.className}`} />;
+  },
+  img: ImgHTML,
+  Img,
+};
+
+export type MDXProvidedComponents = typeof components;
 
 const mdxComponents = (options: Options) => {
   const footer = options.footer
@@ -29,21 +47,12 @@ const mdxComponents = (options: Options) => {
     return <Slide {...props} footer={footer} header={header} />;
   }, []);
 
-  const components = {
+  const __components = {
     Slide: SlideWrapWithFooter,
-    Video,
-    OnFragment,
-    DummyFragments,
-    Conclusion,
-    Card,
-    Refs,
-    code: (props: any) => {
-      return <code {...props} className={`language-${props.className}`} />;
-    },
-    img: Image,
+    ...components,
   };
 
-  return { ...components };
+  return { ...__components };
 };
 
 export default mdxComponents;

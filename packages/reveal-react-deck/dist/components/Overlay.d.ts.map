@@ -1,0 +1,1 @@
+{"version":3,"file":"Overlay.d.ts","sourceRoot":"","sources":["../../src/components/Overlay.tsx"],"names":[],"mappings":"AAIA,eAAO,MAAM,OAAO,GAAI,6CAKrB;IACD,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;IAC1B,OAAO,CAAC,EAAE,MAAM,GAAG,YAAY,GAAG,UAAU,CAAC;IAC7C,QAAQ,CAAC,EAAE,OAAO,CAAC;IACnB,SAAS,EAAE,MAAM,CAAC;CACnB,uCA+BA,CAAC"}

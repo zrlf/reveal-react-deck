@@ -139,6 +139,9 @@ importers:
       '@types/reveal.js':
         specifier: ^5.0.5
         version: 5.0.5
+      acorn:
+        specifier: ^8.14.1
+        version: 8.14.1
       bibtex:
         specifier: ^0.9.0
         version: 0.9.0
