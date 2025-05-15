@@ -10,11 +10,14 @@ import { Card } from "./Card.js";
 import { Ref } from "./Refs.js";
 import { Img, ImgHTML } from "./Img.js";
 import { Overlay } from "./Overlay.js";
+import { Admonition } from "./Admonition.js";
 export { SlideNumber } from "./SlideNumber.js";
 const components = {
+    Admonition,
     Video,
     OnFragment,
     DummyFragments,
+    Fragment: (props) => _jsx("div", { className: "fragment", ...props }),
     Conclusion,
     Overlay,
     Card,

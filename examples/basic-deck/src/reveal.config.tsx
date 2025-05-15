@@ -32,7 +32,7 @@ export const options: Options = {
   },
   header: {
     right: (
-      <div className="flex h-[5vh] items-center gap-4">
+      <div className="flex h-(--rv-title-bar-height) items-center gap-4">
         <img src="/eth_logo_kurz_pos.svg" alt="eth" className="h-3" />
         <img src="/cmbm_logo.svg" className="h-8" alt="cmbm" />
       </div>

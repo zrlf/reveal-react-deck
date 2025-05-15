@@ -1,0 +1,36 @@
+@layer base {
+  /* Slide layouts */
+  [data-slide-content] {
+    @apply flex flex-col gap-2 justify-center items-center;
+    position: absolute;
+    top: calc(var(--rv-title-bar-height) + var(--rv-content-margin));
+    left: var(--rv-content-margin);
+    right: var(--rv-content-margin);
+    bottom: var(--rv-content-margin);
+  }
+
+  [data-slide-layout="full"] {
+    @apply justify-center items-center;
+
+    &[data-slide-content] {
+      top: var(--rv-content-margin);
+    }
+  }
+
+  [data-slide-layout="default"] {
+    @apply justify-normal;
+  }
+
+  [data-slide-layout="center"] {
+    @apply justify-center -mt-[var(--rv-title-bar-height)];
+  }
+
+  [data-slide-layout="center2"] {
+    @apply justify-center;
+  }
+
+  [data-slide-layout="left"] {
+    @apply justify-start items-start text-left;
+  }
+}
+

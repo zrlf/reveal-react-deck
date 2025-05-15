@@ -10,13 +10,16 @@ import { Card } from "./Card";
 import { Ref } from "./Refs";
 import { Img, ImgHTML } from "./Img";
 import { Overlay } from "./Overlay";
+import { Admonition } from "./Admonition";
 
 export { SlideNumber } from "./SlideNumber";
 
 const components = {
+  Admonition,
   Video,
   OnFragment,
   DummyFragments,
+  Fragment: (props) => <div className="fragment" {...props} />,
   Conclusion,
   Overlay,
   Card,

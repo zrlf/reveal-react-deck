@@ -3,26 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "pnpm build:layout",
+    "build": "pnpm build:layout && pnpm build:mdx-plugins",
     "build:layout": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
-    "build:tailwind": "tailwindcss -i css/style.css -o ./dist/style.css",
+    "build:mdx-plugins": "tsup",
     "clean": "rimraf dist",
     "dev": "concurrently \"tsc -w --project tsconfig.build.json\" \"tsc-alias -w -p tsconfig.build.json\"",
-    "dev:tailwind": "tailwindcss -i css/style.css -o ./dist/style.css -w",
     "lint": "eslint .",
     "types:check": "tsc --noEmit"
   },
   "exports": {
     ".": "./dist/index.js",
     "./config": "./dist/config.js",
+    "./plugins": "./dist/plugins.mjs",
     "./style.css": "./dist/style.css",
     "./css/*": "./css/*",
     "./components/*": "./dist/components/*",
-    "./hooks/*": "./dist/hooks/*",
-    "./plugins/*": {
-      "import": "./dist/plugins/*.js",
-      "type": "./dist/plugins/*.d.ts"
-    }
+    "./hooks/*": "./dist/hooks/*"
   },
   "keywords": [],
   "author": "",
@@ -51,6 +47,7 @@
     "react-dom": "^19.1.0",
     "reveal.js": "^5.2.1",
     "tsc-alias": "^1.8.15",
+    "tsup": "^8.4.0",
     "typescript": "^5.8.3",
     "unist-util-visit": "^5.0.0"
   },

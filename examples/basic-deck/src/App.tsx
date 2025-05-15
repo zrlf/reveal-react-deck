@@ -1,5 +1,6 @@
 import RevealSlides, { SlideFile } from "reveal-react-deck";
 import { options, revealOptions } from "./reveal.config";
+import { useBibStore } from "reveal-react-deck/hooks/useBibtex.js";
 
 function loadSlides(): SlideFile[] {
   const slides = import.meta.glob("/slides/*.mdx", { eager: true });
@@ -14,6 +15,8 @@ function loadSlides(): SlideFile[] {
 }
 
 function App() {
+  useBibStore().fetchBibFile(options.bibFile!);
+
   return (
     <RevealSlides
       slides={loadSlides()}

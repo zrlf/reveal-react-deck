@@ -1,6 +1,7 @@
 import { Refs } from "@/components/Refs";
 import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { useBibStore } from "@/hooks/useBibtex";
+import { cn } from "@/utils";
 
 // Create a context to store the present status
 const SectionContext = createContext({
@@ -15,7 +16,7 @@ const SectionContext = createContext({
 // The parent component
 const SectionScopeProvider: React.FC<
   React.PropsWithChildren<React.HTMLAttributes<HTMLElement>>
-> = ({ children, ...props }) => {
+> = ({ children, className, ...props }) => {
   const [isPresent, setIsPresent] = useState(false);
   const [id, setId] = useState("");
   const [fragment, setFragment] = useState(-1);
@@ -70,7 +71,7 @@ const SectionScopeProvider: React.FC<
     <SectionContext.Provider
       value={{ isPresent, id, fragment, overlayRef, references, setReferences }}
     >
-      <section ref={sectionRef} className="h-full" {...props}>
+      <section ref={sectionRef} className={cn("h-full", className)} {...props}>
         {children}
         <div
           ref={overlayRef}

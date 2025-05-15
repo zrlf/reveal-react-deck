@@ -1,4 +1,9 @@
+@import "tailwindcss";
 @import "./style.css";
+@import "./admonition.css";
+@import "./layouts.css";
+
+@source "../dist/components/**/*.js";
 
 #root {
   width: 100vw;
@@ -6,68 +11,36 @@
 }
 
 :root {
-  --foreground: #0f0f0f;
-  --background: #fafafa;
-  --font: sans-serif;
   --r-height: 1200px;
   --r-width: 1920px;
-  --bg-gradient: linear-gradient(to top right,
-      var(--secondary),
-      var(--primary));
 
-  /* Reveal MDX global variables */
-  --slide-margin: 1rem;
-  /* --title-background: linear-gradient(to right, */
-  /*     var(--primary-600), */
-  /*     var(--primary-300)); */
-  --title-background: transparent;
-  --title-color: black;
-  --subtitle-color: var(--gray);
-  --title-bar-height: 3rem;
+  /* CSS variables */
+  --rv-foreground: #0f0f0f;
+  --rv-background: #fafafa;
+  --rv-font: sans-serif;
+  --rv-font-size: 24pt;
+  --rv-content-margin: 1rem;
+  --rv-title-background: transparent;
+  --rv-title-color: var(--rv-foreground);
+  --rv-subtitle-color: var(--rv-foreground);
+  --rv-title-bar-height: 3em;
 }
 
-html {
-  font-size: 22pt;
+:root .dark {
+  --rv-background: #1a191f;
+  --rv-foreground: #e2e2e2;
+  --rv-title-color: var(--rv-foreground);
+  --rv-subtitle-color: var(--rv-foreground);
 }
 
-body {
-  font-family: var(--font), Arial, Helvetica, sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* -------------- */
-/* Reveal styling */
-/* -------------- */
-
-.reveal .slide-background {
-  background-color: var(--background);
-}
-
-.reveal .has-dark-background {
-  --background: #0a0a0a;
-  --foreground: #e2e2e2;
-  color: var(--foreground);
-  --title-color: var(--foreground);
-  --subtitle-color: var(--foreground);
-
-  [data-slide-title] {
-    &::after {
-      all: unset;
-      content: "";
-      @apply absolute bottom-0 left-0 right-0 h-px;
-      @apply bg-foreground/50;
-    }
-  }
-
-  .header {
-    @apply invert;
-  }
+@theme {
+  --margin-content: var(--rv-content-margin);
+  --padding-content: var(--rv-content-margin);
 }
 
 @theme inline {
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
+  --color-foreground: var(--rv-foreground);
+  --color-background: var(--rv-background);
 }
 
 @layer utilities {
@@ -80,11 +53,11 @@ body {
   }
 
   .no-margin {
-    margin: 0 calc(-1 * var(--slide-margin));
+    margin: 0 calc(-1 * var(--rv-content-margin));
   }
 
   .slide-padding {
-    padding: var(--slide-margin);
+    padding: var(--rv-content-margin);
   }
 
   .h-inherit {
@@ -92,43 +65,71 @@ body {
   }
 }
 
-@layer base {
+html {
+  font-size: var(--rv-font-size, 24pt);
+}
 
+body {
+  font-family: var(--rv-font), Helvetica, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reveal .slide-background {
+  background-color: var(--rv-background);
+}
+
+.reveal .has-dark-background,
+.reveal .dark {
+  [data-slide-title] {
+    &::after {
+      content: "";
+      @apply absolute bottom-0 left-0 right-0;
+      @apply h-full bg-foreground/5;
+    }
+  }
+
+  .header {
+    @apply invert;
+  }
+}
+
+@layer base {
   /* Reverts a preflight rule on hidden that breaks some reveal.js */
   [hidden] {
     display: revert !important;
   }
 
+  section {
+    color: var(--rv-foreground);
+  }
+
   blockquote {
-    @apply bg-highlight border-l-8 border-highlight px-4 my-4 rounded;
+    @apply bg-highlight/40 border-l-8 border-highlight px-4 py-1 my-4 rounded;
   }
 
   img {
     @apply max-w-full max-h-full m-0;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-semibold;
+  h1 {
+    @apply font-semibold text-3xl;
     @apply mb-2;
   }
 
-  h1 {
-    @apply text-primary font-bold text-3xl;
-  }
-
   h2 {
-    @apply text-2xl text-primary;
+    @apply text-2xl font-semibold;
+    @apply mb-2;
   }
 
   h3 {
-    @apply text-xl text-primary-500;
+    @apply text-xl font-semibold;
+    @apply mb-2;
   }
 
   h4 {
-    @apply text-xl text-primary-400;
+    @apply text-xl text-muted font-semibold;
+    @apply mb-2;
   }
 
   /* Lists */
@@ -162,35 +163,34 @@ body {
   }
 
   hr {
-    @apply bg-gray-400 my-2 h-[1px] w-full;
+    @apply bg-gray-400 my-2 h-px w-full;
   }
 
   /* -------------- */
   /* Slide title  */
   /* -------------- */
   [data-slide-title] {
-    @apply fixed z-20 pb-1 h-[var(--title-bar-height)] px-[var(--slide-margin)] w-full flex items-center leading-none;
+    @apply fixed z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
 
-    &>div {
-      @apply flex items-baseline mt-1;
+    &:has(> :nth-child(2)) > :first-child {
+      @apply opacity-50;
+    }
 
-      &:has(> :nth-child(2))> :first-child {
-        @apply opacity-50;
-      }
+    & > *:not(:last-child)::after {
+      @apply content-['/'] mx-2;
+    }
 
-      &>*:not(:last-child)::after {
-        @apply content-['/'] mx-2;
-      }
+    > h1,
+    > h2 {
+      @apply my-0 normal-case text-lg font-normal;
     }
 
     h1 {
-      @apply normal-case text-lg font-normal;
-      color: var(--title-color);
+      color: var(--rv-title-color);
     }
 
     h2 {
-      @apply relative mt-0 text-lg normal-case font-normal;
-      color: var(--subtitle-color);
+      color: var(--rv-subtitle-color);
     }
 
     &::after {
@@ -202,7 +202,7 @@ body {
       left: calc(50% - max(50vw, calc(var(--r-width) / 2)));
       right: calc(50% - max(50vw, calc(var(--r-width) / 2)));
       z-index: -1;
-      background: var(--title-background);
+      background: var(--rv-title-background);
     }
   }
 }
@@ -221,46 +221,8 @@ body {
   position: absolute;
   inset: 0;
   content: "";
-  border: 2px dashed var(--foreground);
+  border: 2px dashed var(--rv-foreground);
   z-index: 50;
-}
-
-/* Slide layouts */
-[data-slide-content] {
-  @apply flex flex-col gap-2 justify-center items-center;
-  position: absolute;
-  top: calc(var(--title-bar-height) + var(--slide-margin));
-  left: var(--slide-margin);
-  right: var(--slide-margin);
-  bottom: var(--slide-margin);
-
-  /* p { */
-  /*   height: inherit; */
-  /* } */
-}
-
-[data-slide-layout="full"] {
-  @apply justify-center items-center;
-
-  &[data-slide-content] {
-    top: var(--slide-margin);
-  }
-}
-
-[data-slide-layout="default"] {
-  @apply justify-normal;
-}
-
-[data-slide-layout="center"] {
-  @apply justify-center -mt-[var(--title-bar-height)];
-}
-
-[data-slide-layout="center2"] {
-  @apply justify-center;
-}
-
-[data-slide-layout="left"] {
-  @apply justify-start items-start text-left;
 }
 
 .reference-container {
@@ -268,14 +230,6 @@ body {
 
   li {
     @apply leading-tight;
-  }
-}
-
-.hero {
-  @apply text-white;
-
-  hl {
-    @apply text-white;
   }
 }
 
@@ -362,7 +316,7 @@ code[data-line-numbers] {
   counter-reset: line;
 }
 
-code[data-line-numbers]>[data-line]::before {
+code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
 
@@ -407,7 +361,8 @@ pre [data-line] {
   @apply bg-zinc-700 text-zinc-200 rounded-t-md py-2 pl-3 text-xs text-left;
 }
 
-figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title]) pre {
+figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
+  pre {
   @apply !rounded-t-none;
 }
 

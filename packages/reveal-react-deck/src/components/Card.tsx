@@ -10,7 +10,7 @@ export const Card = ({
     <div
       {...props}
       className={cn(
-        "border border-muted p-3 rounded-lg bg-neutral-200",
+        "border-current border-l-4 shadow p-3 rounded-lg bg-neutral-200",
         className,
       )}
     >

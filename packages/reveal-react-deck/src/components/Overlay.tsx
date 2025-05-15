@@ -19,7 +19,7 @@ export const Overlay = ({
   }
 
   const classesCentered = "flex flex-col items-center justify-center";
-  const classesConclusion = "backdrop-blur-sm";
+  const classesConclusion = "bg-background/70";
 
   return createPortal(
     <div

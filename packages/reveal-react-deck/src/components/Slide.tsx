@@ -5,6 +5,7 @@ import {
   useSectionContext,
 } from "@/context/SectionScopeProvider";
 import { DummyFragments } from "./DummyFragment";
+import { cn } from "@/utils";
 
 interface Frontmatter {
   title?: string;
@@ -15,6 +16,8 @@ interface Frontmatter {
   reveal?: Record<string, any>;
   hidden?: boolean;
   fragments?: number;
+  dark?: boolean;
+  className?: string;
 }
 
 interface SlideProps {
@@ -73,20 +76,26 @@ const Slide: React.FC<SlideProps> = ({
     return null;
   }
   return (
-    <SectionScopeProvider {...frontmatter.reveal}>
+    <SectionScopeProvider
+      {...frontmatter.reveal}
+      className={cn(frontmatter.dark && "dark")}
+    >
       {/* Optionally render frontmatter content */}
       {header}
       {frontmatter.layout !== "full" && frontmatter.layout !== "hero" && (
         <div data-slide-title>
-          <div>
-            <h1 dangerouslySetInnerHTML={{ __html: frontmatter.title || "" }} />
-            {frontmatter.subtitle && (
-              <h2 dangerouslySetInnerHTML={{ __html: frontmatter.subtitle }} />
-            )}
-          </div>
+          <h1 dangerouslySetInnerHTML={{ __html: frontmatter.title || "" }} />
+          {frontmatter.subtitle && (
+            <h2 dangerouslySetInnerHTML={{ __html: frontmatter.subtitle }} />
+          )}
         </div>
       )}
-      <SlideTemplate frontmatter={frontmatter}>{children}</SlideTemplate>
+      <SlideTemplate
+        frontmatter={frontmatter}
+        className={frontmatter.className}
+      >
+        {children}
+      </SlideTemplate>
       {footer}
     </SectionScopeProvider>
   );

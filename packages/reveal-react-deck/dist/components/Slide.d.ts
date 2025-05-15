@@ -8,6 +8,8 @@ interface Frontmatter {
     reveal?: Record<string, any>;
     hidden?: boolean;
     fragments?: number;
+    dark?: boolean;
+    className?: string;
 }
 interface SlideProps {
     frontmatter: Frontmatter;

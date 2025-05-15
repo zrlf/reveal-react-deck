@@ -6,34 +6,40 @@ type ImgProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   /** The image URL injected by our remark plugin */
   src: string;
   caption?: string;
+  containerClass?: string;
+  fillHeight?: boolean;
 };
 
-export default function Img({ src, caption, ...rest }: ImgProps) {
+function getCaption(caption: string): React.ReactNode {
+  const match = caption.match(/^(.*?)\s\^(@\S+)/); // captures text before ^ and the cite key
+  if (match) {
+    const [, text, citeKey] = match;
+    return (
+      <span>
+        {text}
+        <Ref id={citeKey} />
+      </span>
+    );
+  } else {
+    return <span>{caption}</span>; // no citation found
+  }
+}
+
+export default function Img({ src, caption, containerClass, fillHeight, ...rest }: ImgProps) {
   const { className, ...restProps } = rest;
 
-  function getCaption(caption: string): React.ReactNode {
-    const match = caption.match(/^(.*?)\s\^(@\S+)/); // captures text before ^ and the cite key
-    if (match) {
-      const [, text, citeKey] = match;
-      return (
-        <span>
-          {text}<Ref id={citeKey} />
-        </span>
-      );
-    } else {
-      return <span>{caption}</span>; // no citation found
-    }
-  }
-
   return (
-    <figure className={cn("relative w-full h-full m-0", className)}>
+    <figure className={cn("m-0 flex flex-col", fillHeight && "h-full", containerClass)}>
+      {/* image shrinks/grows to fill the remaining space */}
       <img
         data-src={src}
         {...restProps}
-        className={cn("w-fit h-fit object-contain", rest.className)}
+        className={cn("flex-1 min-h-0 w-full object-contain", className)}
       />
+
+      {/* caption keeps its own height */}
       {caption && (
-        <figcaption className="absolute bottom-0 left-0 p-2 text-sm">
+        <figcaption className="p-1 text-sm w-full mt-2 flex-none self-start">
           {getCaption(caption)}
         </figcaption>
       )}

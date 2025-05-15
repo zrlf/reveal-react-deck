@@ -2,6 +2,8 @@
   --color-foreground: #000000;
   --color-background: #e2e2e2;
   --color-muted: color-mix(in oklab, var(--color-foreground), transparent 80%);
+  --color-highlight: #d3deef;
+  --color-highlight-dark: #08407e;
 
   --color-primary: #215caf;
   --color-primary-50: #f2f6fd;
@@ -54,9 +56,6 @@
   --color-quaternary-800: #0b667f;
   --color-quaternary-900: #0e546b;
   --color-quaternary-950: #02384a;
-
-  --color-highlight: #d3deef;
-  --color-highlight-dark: #08407e;
 
   --color-ethblue: #215caf;
   --color-ethblue-80: #4d7dbf;

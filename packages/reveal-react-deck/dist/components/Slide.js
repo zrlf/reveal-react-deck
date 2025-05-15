@@ -3,6 +3,7 @@ import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { SectionScopeProvider, useSectionContext, } from "../context/SectionScopeProvider.js";
 import { DummyFragments } from "./DummyFragment.js";
+import { cn } from "../utils.js";
 function SlideTemplate({ children, frontmatter = {}, className, ...props }) {
     const [scope, animate] = useAnimate();
     if (frontmatter.animateEntry) {
@@ -23,6 +24,6 @@ const Slide = ({ frontmatter, children, footer, header, }) => {
     if (frontmatter.hidden) {
         return null;
     }
-    return (_jsxs(SectionScopeProvider, { ...frontmatter.reveal, children: [header, frontmatter.layout !== "full" && frontmatter.layout !== "hero" && (_jsx("div", { "data-slide-title": true, children: _jsxs("div", { children: [_jsx("h1", { dangerouslySetInnerHTML: { __html: frontmatter.title || "" } }), frontmatter.subtitle && (_jsx("h2", { dangerouslySetInnerHTML: { __html: frontmatter.subtitle } }))] }) })), _jsx(SlideTemplate, { frontmatter: frontmatter, children: children }), footer] }));
+    return (_jsxs(SectionScopeProvider, { ...frontmatter.reveal, className: cn(frontmatter.dark && "dark"), children: [header, frontmatter.layout !== "full" && frontmatter.layout !== "hero" && (_jsxs("div", { "data-slide-title": true, children: [_jsx("h1", { dangerouslySetInnerHTML: { __html: frontmatter.title || "" } }), frontmatter.subtitle && (_jsx("h2", { dangerouslySetInnerHTML: { __html: frontmatter.subtitle } }))] })), _jsx(SlideTemplate, { frontmatter: frontmatter, className: frontmatter.className, children: children }), footer] }));
 };
 export { Slide };

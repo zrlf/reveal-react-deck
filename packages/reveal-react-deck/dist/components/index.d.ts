@@ -3,6 +3,15 @@ import { Options } from "../config.js";
 import { Img } from "./Img.js";
 export { SlideNumber } from "./SlideNumber.js";
 declare const components: {
+    Admonition: (props: {
+        type: string;
+        iconType?: string;
+        title?: string;
+        hideTitle?: boolean;
+        contentClasses?: string;
+        className?: string;
+        children: React.ReactNode;
+    }) => import("react/jsx-runtime").JSX.Element;
     Video: ({ playOnFragment, playbackRate, ...props }: React.VideoHTMLAttributes<HTMLVideoElement> & {
         playOnFragment?: number;
         playbackRate?: number;
@@ -14,6 +23,7 @@ declare const components: {
     DummyFragments: ({ n }: {
         n: number;
     }) => import("react/jsx-runtime").JSX.Element;
+    Fragment: (props: any) => import("react/jsx-runtime").JSX.Element;
     Conclusion: ({ children, fragment, className, }: {
         children: React.ReactNode;
         fragment?: boolean;
@@ -37,6 +47,15 @@ declare const components: {
 };
 export type MDXProvidedComponents = typeof components;
 declare const mdxComponents: (options: Options) => {
+    Admonition: (props: {
+        type: string;
+        iconType?: string;
+        title?: string;
+        hideTitle?: boolean;
+        contentClasses?: string;
+        className?: string;
+        children: React.ReactNode;
+    }) => import("react/jsx-runtime").JSX.Element;
     Video: ({ playOnFragment, playbackRate, ...props }: React.VideoHTMLAttributes<HTMLVideoElement> & {
         playOnFragment?: number;
         playbackRate?: number;
@@ -48,6 +67,7 @@ declare const mdxComponents: (options: Options) => {
     DummyFragments: ({ n }: {
         n: number;
     }) => import("react/jsx-runtime").JSX.Element;
+    Fragment: (props: any) => import("react/jsx-runtime").JSX.Element;
     Conclusion: ({ children, fragment, className, }: {
         children: React.ReactNode;
         fragment?: boolean;
