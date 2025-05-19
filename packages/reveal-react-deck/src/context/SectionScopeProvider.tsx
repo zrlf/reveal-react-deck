@@ -8,7 +8,6 @@ const SectionContext = createContext({
   isPresent: false,
   id: "",
   fragment: 0,
-  overlayRef: null as React.RefObject<HTMLDivElement | null> | null,
   references: [] as string[],
   setReferences: (_: string[]) => {},
 });
@@ -65,18 +64,12 @@ const SectionScopeProvider: React.FC<
     }
   }, []);
 
-  const overlayRef = useRef<HTMLDivElement>(null);
-
   return (
     <SectionContext.Provider
-      value={{ isPresent, id, fragment, overlayRef, references, setReferences }}
+      value={{ isPresent, id, fragment, references, setReferences }}
     >
       <section ref={sectionRef} className={cn("h-full", className)} {...props}>
         {children}
-        <div
-          ref={overlayRef}
-          className="absolute inset-0 pointer-events-none"
-        />
         <Refs references={references} bib={bib} />
       </section>
     </SectionContext.Provider>

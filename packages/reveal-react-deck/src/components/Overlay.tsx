@@ -1,6 +1,4 @@
-import { useSectionContext } from "@/context/SectionScopeProvider";
 import cn from "clsx";
-import { createPortal } from "react-dom";
 
 export const Overlay = ({
   children,
@@ -11,21 +9,16 @@ export const Overlay = ({
   children: React.ReactNode;
   variant?: "none" | "conclusion" | "centered";
   fragment?: boolean;
-  className: string;
+  className?: string;
 }) => {
-  const { overlayRef } = useSectionContext();
-  if (!overlayRef?.current) {
-    return null;
-  }
-
   const classesCentered = "flex flex-col items-center justify-center";
   const classesConclusion = "bg-background/70";
 
-  return createPortal(
+  return (
     <div
       className={cn(
         fragment && "fragment",
-        "absolute z-10 inset-0 no-margin slide-padding",
+        "overlay absolute z-10 inset-0 no-margin slide-padding",
         variant == "centered" && classesCentered,
         variant == "conclusion" && cn(classesConclusion, classesCentered),
         className,
@@ -33,14 +26,13 @@ export const Overlay = ({
     >
       {variant == "conclusion" ? (
         <div
-          className={cn(className, "w-2/3 bg-gray-200 p-4 rounded-xl shadow")}
+          className={cn(className, "conclusion-overlay")}
         >
           {children}
         </div>
       ) : (
         children
       )}
-    </div>,
-    overlayRef.current,
+    </div>
   );
 };

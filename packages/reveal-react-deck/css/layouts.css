@@ -3,17 +3,18 @@
   [data-slide-content] {
     @apply flex flex-col gap-2 justify-center items-center;
     position: absolute;
-    top: calc(var(--rv-title-bar-height) + var(--rv-content-margin));
-    left: var(--rv-content-margin);
-    right: var(--rv-content-margin);
-    bottom: var(--rv-content-margin);
+    inset: 0;
+    padding-top: calc(var(--rv-title-bar-height) + var(--rv-content-margin));
+    padding-left: var(--rv-content-margin);
+    padding-right: var(--rv-content-margin);
+    padding-bottom: var(--rv-content-margin);
   }
 
   [data-slide-layout="full"] {
     @apply justify-center items-center;
 
     &[data-slide-content] {
-      top: var(--rv-content-margin);
+      padding-top: var(--rv-content-margin);
     }
   }
 
@@ -32,5 +33,44 @@
   [data-slide-layout="left"] {
     @apply justify-start items-start text-left;
   }
-}
 
+  /* -------------- */
+  /* Slide title  */
+  /* -------------- */
+  [data-slide-title] {
+    @apply fixed z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
+
+    &:has(> :nth-child(2)) > :first-child {
+      @apply text-muted-foreground;
+    }
+
+    & > *:not(:last-child)::after {
+      @apply content-['/'] mx-2;
+    }
+
+    > h1,
+    > h2 {
+      @apply my-0 normal-case text-lg font-normal italic;
+    }
+
+    h1 {
+      @apply text-title;
+    }
+
+    h2 {
+      @apply text-subtitle;
+    }
+
+    &::after {
+      @apply shadow-md;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0px;
+      left: calc(50% - max(50vw, calc(var(--r-width) / 2)));
+      right: calc(50% - max(50vw, calc(var(--r-width) / 2)));
+      z-index: -1;
+      background: var(--rv-title-background);
+    }
+  }
+}

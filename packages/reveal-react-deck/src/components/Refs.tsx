@@ -70,7 +70,7 @@ export const Refs = ({
   }, [bib, references]);
 
   return (
-    <div className="absolute bottom-0 left-0 mx-4 my-0 text-xs text-foreground/50">
+    <div className="reference-container absolute bottom-0 left-0 mx-4 my-0 text-xs text-foreground/50 [&_ol]:leading-tight">
       <ol>{refsList}</ol>
     </div>
   );

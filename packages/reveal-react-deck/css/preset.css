@@ -33,16 +33,6 @@
   --rv-subtitle-color: var(--rv-foreground);
 }
 
-@theme {
-  --margin-content: var(--rv-content-margin);
-  --padding-content: var(--rv-content-margin);
-}
-
-@theme inline {
-  --color-foreground: var(--rv-foreground);
-  --color-background: var(--rv-background);
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -53,7 +43,13 @@
   }
 
   .no-margin {
-    margin: 0 calc(-1 * var(--rv-content-margin));
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .no-margin-y {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .slide-padding {
@@ -95,6 +91,10 @@ body {
 }
 
 @layer base {
+  :root {
+    text-underline-offset: 8px;
+  }
+
   /* Reverts a preflight rule on hidden that breaks some reveal.js */
   [hidden] {
     display: revert !important;
@@ -105,7 +105,7 @@ body {
   }
 
   blockquote {
-    @apply bg-highlight/40 border-l-8 border-highlight px-4 py-1 my-4 rounded;
+    @apply bg-muted border-l-8 border-highlight px-4 py-1 my-4 rounded;
   }
 
   img {
@@ -113,41 +113,50 @@ body {
   }
 
   h1 {
-    @apply font-semibold text-3xl;
+    @apply font-semibold text-primary text-2xl;
     @apply mb-2;
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-xl text-secondary font-semibold;
     @apply mb-2;
   }
 
   h3 {
-    @apply text-xl font-semibold;
+    @apply text-lg text-secondary font-semibold italic;
     @apply mb-2;
   }
 
   h4 {
-    @apply text-xl text-muted font-semibold;
+    @apply text-lg text-muted-foreground font-semibold italic;
     @apply mb-2;
   }
 
   /* Lists */
   ul,
   ol {
-    @apply list-inside leading-normal text-left;
+    @apply leading-normal space-y-1 text-left;
+  }
+
+  /* makes sure that the list numbers/disks are not cut off */
+  [data-slide-content] {
+
+    >ul,
+    >ol {
+      @apply ml-6;
+    }
   }
 
   ul li {
-    @apply list-disc marker:text-gray-400;
+    @apply list-disc marker:text-muted-foreground;
+  }
+
+  ol li {
+    @apply list-decimal marker:text-muted-foreground;
   }
 
   p {
     @apply leading-normal;
-  }
-
-  ol {
-    list-style: decimal;
   }
 
   ref {
@@ -164,46 +173,6 @@ body {
 
   hr {
     @apply bg-gray-400 my-2 h-px w-full;
-  }
-
-  /* -------------- */
-  /* Slide title  */
-  /* -------------- */
-  [data-slide-title] {
-    @apply fixed z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
-
-    &:has(> :nth-child(2)) > :first-child {
-      @apply opacity-50;
-    }
-
-    & > *:not(:last-child)::after {
-      @apply content-['/'] mx-2;
-    }
-
-    > h1,
-    > h2 {
-      @apply my-0 normal-case text-lg font-normal;
-    }
-
-    h1 {
-      color: var(--rv-title-color);
-    }
-
-    h2 {
-      color: var(--rv-subtitle-color);
-    }
-
-    &::after {
-      @apply shadow-md;
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0px;
-      left: calc(50% - max(50vw, calc(var(--r-width) / 2)));
-      right: calc(50% - max(50vw, calc(var(--r-width) / 2)));
-      z-index: -1;
-      background: var(--rv-title-background);
-    }
   }
 }
 
@@ -231,6 +200,14 @@ body {
   li {
     @apply leading-tight;
   }
+}
+
+.overlay {
+  @apply z-20;
+}
+
+.conclusion-overlay {
+  @apply flex justify-center bg-secondary-200 p-3 px-6 rounded-md shadow-lg;
 }
 
 /* Headings */
@@ -316,7 +293,7 @@ code[data-line-numbers] {
   counter-reset: line;
 }
 
-code[data-line-numbers] > [data-line]::before {
+code[data-line-numbers]>[data-line]::before {
   counter-increment: line;
   content: counter(line);
 
@@ -361,8 +338,7 @@ pre [data-line] {
   @apply bg-zinc-700 text-zinc-200 rounded-t-md py-2 pl-3 text-xs text-left;
 }
 
-figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
-  pre {
+figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title]) pre {
   @apply !rounded-t-none;
 }
 

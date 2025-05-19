@@ -1,6 +1,4 @@
-import { useSectionContext } from "@/context/SectionScopeProvider";
 import cn from "clsx";
-import { createPortal } from "react-dom";
 
 export const Conclusion = ({
   children,
@@ -11,12 +9,7 @@ export const Conclusion = ({
   fragment?: boolean;
   className: string;
 }) => {
-  const { overlayRef } = useSectionContext();
-  if (!overlayRef?.current) {
-    return null;
-  }
-
-  return createPortal(
+  return (
     <div
       className={cn(
         fragment && "fragment",
@@ -26,7 +19,6 @@ export const Conclusion = ({
       <div className={cn(className, "w-2/3 bg-gray-200 p-4 rounded-xl shadow")}>
         {children}
       </div>
-    </div>,
-    overlayRef.current,
+    </div>
   );
 };

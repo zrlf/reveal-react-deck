@@ -28,17 +28,15 @@ const Slides = ({
   revealRef,
 }: {
   slides: SlideFile[];
-  revealRef: any;
+  revealRef: React.MutableRefObject<Reveal.Api | null>;
 }) => {
-  const currentSlide = useDeckStore().currentSlide;
-  const currentFragment = useDeckStore().currentFragment;
-
   useEffect(() => {
     if (revealRef.current) {
+      const { indexh, indexf } = revealRef.current.getState();
       revealRef.current.sync();
-      revealRef.current.slide(currentSlide, 0, currentFragment[currentSlide]);
+      revealRef.current.slide(indexh, 0, indexf);
     }
-  }, [revealRef, slides]);
+  }, [slides]);
 
   return (
     <>
@@ -98,34 +96,38 @@ const useReveal = ({
       ...options,
     });
 
-    deckRef.current.initialize({
-      plugins: [RevealHighlight],
-    }).then(() => {
-      const deck = deckRef.current!;
-      deckStore.setDeck(deck);
-      deck.on("overviewshown", () => {
-        useDeckStore.setState({ isOverview: true });
-        window.localStorage.setItem("isOverview", "true");
+    deckRef.current
+      .initialize({
+        plugins: [RevealHighlight],
+      })
+      .then(() => {
+        const deck = deckRef.current!;
+        deckStore.setDeck(deck);
+        deck.on("overviewshown", () => {
+          useDeckStore.setState({ isOverview: true });
+          window.localStorage.setItem("isOverview", "true");
+        });
+        deck.on("overviewhidden", () => {
+          useDeckStore.setState({ isOverview: false });
+          window.localStorage.setItem("isOverview", "false");
+        });
+        deck.on("slidechanged", (_event: Event) => {
+          const event = _event as RevealEvent;
+          deckStore.setCurrentSlide(event.indexh, event.currentSlide.id);
+        });
+        deck.on("fragmentshown", (_event: Event) => {
+          const event = _event as Event & { fragment: HTMLElement };
+          let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
+          deckStore.setFragmentCurrentSlide(fragmentIndex + 1);
+          console.log("fragment shown", fragmentIndex + 1);
+        });
+        deck.on("fragmenthidden", (_event: Event) => {
+          const event = _event as Event & { fragment: HTMLElement };
+          let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
+          deckStore.setFragmentCurrentSlide(fragmentIndex);
+          console.log("fragment hidden", fragmentIndex);
+        });
       });
-      deck.on("overviewhidden", () => {
-        useDeckStore.setState({ isOverview: false });
-        window.localStorage.setItem("isOverview", "false");
-      });
-      deck.on("slidechanged", (_event: Event) => {
-        const event = _event as RevealEvent;
-        deckStore.setCurrentSlide(event.indexh, event.currentSlide.id);
-      });
-      deck.on("fragmentshown", (_event: Event) => {
-        const event = _event as Event & { fragment: HTMLElement };
-        let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
-        deckStore.setFragmentCurrentSlide(fragmentIndex + 1);
-      });
-      deck.on("fragmenthidden", (_event: Event) => {
-        const event = _event as Event & { fragment: HTMLElement };
-        let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
-        deckStore.setFragmentCurrentSlide(fragmentIndex);
-      });
-    });
 
     return () => {
       try {
