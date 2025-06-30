@@ -11,6 +11,7 @@ import { Ref } from "./Refs";
 import { Img, ImgHTML } from "./Img";
 import { Overlay } from "./Overlay";
 import { Admonition } from "./Admonition";
+import { Tabs } from "./Tabs";
 
 export { SlideNumber } from "./SlideNumber";
 
@@ -29,6 +30,7 @@ const components = {
   },
   img: ImgHTML,
   Img,
+  Tabs,
 };
 
 export type MDXProvidedComponents = typeof components;

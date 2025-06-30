@@ -1,16 +1,16 @@
-import { useEffect, useRef } from "react";
+import { cloneElement, isValidElement, useEffect, useRef } from "react";
 
 interface GroupProps {
   [key: string]: number;
 }
 
 const SvgSteps = ({
-  component: Component,
   groups,
+  children,
   ...props
 }: {
-  component: React.FC<React.SVGProps<SVGSVGElement>>;
   groups: GroupProps;
+  children?: React.ReactElement;
 }) => {
   // const { fragment, isPresent } = useSectionContext();
   const svgRef = useRef<SVGSVGElement>(null);
@@ -28,11 +28,13 @@ const SvgSteps = ({
         }
       });
     }
-  }, []);
+  }, [groups]);
 
-  // if (!isPresent) return null;
-
-  return <Component ref={svgRef} {...props} />;
+  if (!children || !isValidElement(children)) {
+    return null;
+  }
+  // @ts-ignore
+  return cloneElement(children, { ref: svgRef, ...props });
 };
 
 export { SvgSteps };

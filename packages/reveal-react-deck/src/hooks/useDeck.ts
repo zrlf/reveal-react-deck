@@ -83,7 +83,7 @@ const useDeckStore = create<DeckStore>((set, get) => ({
       toast = document.createElement("div");
       toast.id = "motion-toast";
       toast.classList.add(
-        ..."fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black opacity-50 text-white px-4 py-2 rounded".split(
+        ..."absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-black opacity-50 text-white px-4 py-2 rounded z-50".split(
           " ",
         ),
       );

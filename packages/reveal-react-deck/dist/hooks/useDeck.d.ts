@@ -14,6 +14,7 @@ interface DeckStore {
     motion: boolean;
     setDeck: (newdeck: Reveal.Api) => void;
     setCurrentSlide: (newSlide: number, id: string) => void;
+    getCurrentSlide: () => number;
     setFragmentCurrentSlide: (newFragment: number) => void;
     toggleMotion: () => void;
     getFragmentCurrentSlide: () => number;

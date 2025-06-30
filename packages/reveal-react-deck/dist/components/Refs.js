@@ -4,18 +4,27 @@ import { normalizeFieldValue } from "bibtex";
 import { useSectionContext } from "../context/SectionScopeProvider.js";
 import React from "react";
 export const Ref = ({ id }) => {
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState([]);
     const { references, setReferences } = useSectionContext();
     useEffect(() => {
-        // get index of the id in refs
-        let index = references.findIndex((ref) => ref === id);
-        if (index == -1) {
-            setReferences([id, ...references]);
-            index = 0;
+        const ids = Array.isArray(id) ? id : [id];
+        const newIndexes = [];
+        let updatedReferences = [...references];
+        for (const refId of ids) {
+            const refIdStr = refId.replace(/@/, "");
+            let idx = updatedReferences.indexOf(refIdStr);
+            if (idx === -1) {
+                updatedReferences = [refIdStr, ...updatedReferences];
+                idx = updatedReferences.length - 1;
+            }
+            newIndexes.push(idx);
         }
-        setIndex(index);
-    }, [references]);
-    return (_jsx("span", { className: "text-xs text-foreground/50 align-super", "data-ref": id, "data-index": index, children: index + 1 }));
+        if (updatedReferences.length !== references.length) {
+            setReferences(updatedReferences);
+        }
+        setIndex(newIndexes);
+    }, [id, references, setReferences]);
+    return (_jsx("span", { className: "text-xs text-foreground/50 align-super", "data-ref": Array.isArray(id) ? id.join(",") : id, "data-index": index.join(","), children: index.map((s) => s + 1).join(",") }));
 };
 function getRefString(id, bib) {
     const refItem = bib.getEntry(id.replace(/@/, ""));
@@ -43,5 +52,5 @@ export const Refs = ({ references, bib, }) => {
             return getRefStringMemo(ref, bib);
         }));
     }, [bib, references]);
-    return (_jsx("div", { className: "absolute bottom-0 left-0 mx-4 my-0 text-xs text-foreground/50", children: _jsx("ol", { children: refsList }) }));
+    return (_jsx("div", { className: "reference-container absolute bottom-0 left-0 mx-4 my-0 text-xs text-foreground/50 [&_ol]:leading-tight", children: _jsx("ol", { children: refsList }) }));
 };

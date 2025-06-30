@@ -28,22 +28,28 @@ declare const components: {
         children: React.ReactNode;
         fragment?: boolean;
         className: string;
-    }) => React.ReactPortal | null;
-    Overlay: ({ children, variant, fragment, className, }: {
+    }) => import("react/jsx-runtime").JSX.Element;
+    Overlay: ({ children, variant, fragment, className, ...props }: {
         children: React.ReactNode;
         variant?: "none" | "conclusion" | "centered";
         fragment?: boolean;
-        className: string;
-    }) => React.ReactPortal | null;
+        className?: string;
+        props?: React.HTMLProps<HTMLDivElement>;
+    }) => import("react/jsx-runtime").JSX.Element;
     Card: ({ children, className, ...props }: {
         children: React.ReactNode;
     } & React.ComponentProps<"div">) => import("react/jsx-runtime").JSX.Element;
     Ref: ({ id }: {
-        id: string;
+        id: string | string[];
     }) => import("react/jsx-runtime").JSX.Element;
     code: (props: any) => import("react/jsx-runtime").JSX.Element;
     img: (props: any) => import("react/jsx-runtime").JSX.Element;
     Img: typeof Img;
+    Tabs: ({ children, breakpoints, className, }: {
+        children: React.ReactNode;
+        breakpoints: number[];
+        className?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
 };
 export type MDXProvidedComponents = typeof components;
 declare const mdxComponents: (options: Options) => {
@@ -72,22 +78,28 @@ declare const mdxComponents: (options: Options) => {
         children: React.ReactNode;
         fragment?: boolean;
         className: string;
-    }) => React.ReactPortal | null;
-    Overlay: ({ children, variant, fragment, className, }: {
+    }) => import("react/jsx-runtime").JSX.Element;
+    Overlay: ({ children, variant, fragment, className, ...props }: {
         children: React.ReactNode;
         variant?: "none" | "conclusion" | "centered";
         fragment?: boolean;
-        className: string;
-    }) => React.ReactPortal | null;
+        className?: string;
+        props?: React.HTMLProps<HTMLDivElement>;
+    }) => import("react/jsx-runtime").JSX.Element;
     Card: ({ children, className, ...props }: {
         children: React.ReactNode;
     } & React.ComponentProps<"div">) => import("react/jsx-runtime").JSX.Element;
     Ref: ({ id }: {
-        id: string;
+        id: string | string[];
     }) => import("react/jsx-runtime").JSX.Element;
     code: (props: any) => import("react/jsx-runtime").JSX.Element;
     img: (props: any) => import("react/jsx-runtime").JSX.Element;
     Img: typeof Img;
+    Tabs: ({ children, breakpoints, className, }: {
+        children: React.ReactNode;
+        breakpoints: number[];
+        className?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
     Slide: (props: any) => import("react/jsx-runtime").JSX.Element;
 };
 export default mdxComponents;

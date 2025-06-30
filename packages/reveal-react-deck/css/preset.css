@@ -17,7 +17,7 @@
   /* CSS variables */
   --rv-foreground: #0f0f0f;
   --rv-background: #fafafa;
-  --rv-font: sans-serif;
+  --rv-font: Helvetica, Arial, sans-serif;
   --rv-font-size: 24pt;
   --rv-content-margin: 1rem;
   --rv-title-background: transparent;
@@ -141,18 +141,18 @@ body {
   /* makes sure that the list numbers/disks are not cut off */
   [data-slide-content] {
 
-    >ul,
-    >ol {
-      @apply ml-6;
+    ul,
+    ol {
+      @apply ml-6 my-2;
     }
   }
 
   ul li {
-    @apply list-disc marker:text-muted-foreground;
+    @apply list-disc marker:text-foreground/50;
   }
 
   ol li {
-    @apply list-decimal marker:text-muted-foreground;
+    @apply list-decimal marker:text-foreground/50;
   }
 
   p {
@@ -282,11 +282,11 @@ span.fragment.word-highlight {
 /* Code styling   */
 /* -------------- */
 pre {
-  @apply text-left px-0 rounded-md m-0 py-2 w-full shadow z-[-1];
+  @apply text-left px-0 m-0 py-2 w-full shadow z-[-1];
 }
 
 code {
-  @apply text-sm !leading-loose;
+  @apply text-sm;
 }
 
 code[data-line-numbers] {

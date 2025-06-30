@@ -23,7 +23,7 @@ const Video = ({
       videoRef.current.play();
     } else if (
       videoRef.current &&
-      playOnFragment &&
+      playOnFragment !== undefined &&
       fragment < playOnFragment
     ) {
       videoRef.current.pause();

@@ -8,7 +8,6 @@ const SectionContext = createContext({
     isPresent: false,
     id: "",
     fragment: 0,
-    overlayRef: null,
     references: [],
     setReferences: (_) => { },
 });
@@ -53,8 +52,7 @@ const SectionScopeProvider = ({ children, className, ...props }) => {
             };
         }
     }, []);
-    const overlayRef = useRef(null);
-    return (_jsx(SectionContext.Provider, { value: { isPresent, id, fragment, overlayRef, references, setReferences }, children: _jsxs("section", { ref: sectionRef, className: cn("h-full", className), ...props, children: [children, _jsx("div", { ref: overlayRef, className: "absolute inset-0 pointer-events-none" }), _jsx(Refs, { references: references, bib: bib })] }) }));
+    return (_jsx(SectionContext.Provider, { value: { isPresent, id, fragment, references, setReferences }, children: _jsxs("section", { ref: sectionRef, className: cn("h-full", className), ...props, children: [children, _jsx(Refs, { references: references, bib: bib })] }) }));
 };
 // Custom hook to use the context
 const useSectionContext = () => useContext(SectionContext);

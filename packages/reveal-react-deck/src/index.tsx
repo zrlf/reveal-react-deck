@@ -41,6 +41,7 @@ const Slides = ({
   return (
     <>
       {slides.map((SlideContent, index) => {
+        if (SlideContent.frontmatter.hidden) return null;
         return <SlideContent.default key={index} />;
       })}
     </>
@@ -86,7 +87,7 @@ const useReveal = ({
   deckRef: React.MutableRefObject<Reveal.Api | null>;
 }) => {
   // Load zustand store
-  const deckStore = useDeckStore((s) => s);
+  const deckStore = useDeckStore();
 
   useEffect(() => {
     if (deckRef.current) return;
@@ -119,13 +120,11 @@ const useReveal = ({
           const event = _event as Event & { fragment: HTMLElement };
           let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
           deckStore.setFragmentCurrentSlide(fragmentIndex + 1);
-          console.log("fragment shown", fragmentIndex + 1);
         });
         deck.on("fragmenthidden", (_event: Event) => {
           const event = _event as Event & { fragment: HTMLElement };
           let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
           deckStore.setFragmentCurrentSlide(fragmentIndex);
-          console.log("fragment hidden", fragmentIndex);
         });
       });
 

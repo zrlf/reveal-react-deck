@@ -6,15 +6,16 @@ import Reveal from "reveal.js";
 import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "./components/index.js";
 const Slides = ({ slides, revealRef, }) => {
-    const currentSlide = useDeckStore().currentSlide;
-    const currentFragment = useDeckStore().currentFragment;
     useEffect(() => {
         if (revealRef.current) {
+            const { indexh, indexf } = revealRef.current.getState();
             revealRef.current.sync();
-            revealRef.current.slide(currentSlide, 0, currentFragment[currentSlide]);
+            revealRef.current.slide(indexh, 0, indexf);
         }
-    }, [revealRef, slides]);
+    }, [slides]);
     return (_jsx(_Fragment, { children: slides.map((SlideContent, index) => {
+            if (SlideContent.frontmatter.hidden)
+                return null;
             return _jsx(SlideContent.default, {}, index);
         }) }));
 };
@@ -30,7 +31,7 @@ function RevealSlides({ slides, options, revealOptions, }) {
 }
 const useReveal = ({ options, deckDivRef, deckRef, }) => {
     // Load zustand store
-    const deckStore = useDeckStore((s) => s);
+    const deckStore = useDeckStore();
     useEffect(() => {
         if (deckRef.current)
             return;
@@ -39,9 +40,11 @@ const useReveal = ({ options, deckDivRef, deckRef, }) => {
         deckRef.current = new Reveal(deckDivRef.current, {
             ...options,
         });
-        deckRef.current.initialize({
+        deckRef.current
+            .initialize({
             plugins: [RevealHighlight],
-        }).then(() => {
+        })
+            .then(() => {
             const deck = deckRef.current;
             deckStore.setDeck(deck);
             deck.on("overviewshown", () => {

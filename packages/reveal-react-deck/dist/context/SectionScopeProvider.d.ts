@@ -3,7 +3,6 @@ declare const useSectionContext: () => {
     isPresent: boolean;
     id: string;
     fragment: number;
-    overlayRef: React.RefObject<HTMLDivElement | null> | null;
     references: string[];
     setReferences: (_: string[]) => void;
 };

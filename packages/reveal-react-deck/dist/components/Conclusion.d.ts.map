@@ -1,1 +1,1 @@
-{"version":3,"file":"Conclusion.d.ts","sourceRoot":"","sources":["../../src/components/Conclusion.tsx"],"names":[],"mappings":"AAIA,eAAO,MAAM,UAAU,GAAI,oCAIxB;IACD,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;IAC1B,QAAQ,CAAC,EAAE,OAAO,CAAC;IACnB,SAAS,EAAE,MAAM,CAAC;CACnB,uCAmBA,CAAC"}
+{"version":3,"file":"Conclusion.d.ts","sourceRoot":"","sources":["../../src/components/Conclusion.tsx"],"names":[],"mappings":"AAEA,eAAO,MAAM,UAAU,GAAI,oCAIxB;IACD,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;IAC1B,QAAQ,CAAC,EAAE,OAAO,CAAC;IACnB,SAAS,EAAE,MAAM,CAAC;CACnB,4CAaA,CAAC"}

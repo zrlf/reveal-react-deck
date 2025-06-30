@@ -1,6 +1,5 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { useEffect, useRef } from "react";
-const SvgSteps = ({ component: Component, groups, ...props }) => {
+import { cloneElement, isValidElement, useEffect, useRef } from "react";
+const SvgSteps = ({ groups, children, ...props }) => {
     // const { fragment, isPresent } = useSectionContext();
     const svgRef = useRef(null);
     useEffect(() => {
@@ -17,8 +16,11 @@ const SvgSteps = ({ component: Component, groups, ...props }) => {
                 }
             });
         }
-    }, []);
-    // if (!isPresent) return null;
-    return _jsx(Component, { ref: svgRef, ...props });
+    }, [groups]);
+    if (!children || !isValidElement(children)) {
+        return null;
+    }
+    // @ts-ignore
+    return cloneElement(children, { ref: svgRef, ...props });
 };
 export { SvgSteps };

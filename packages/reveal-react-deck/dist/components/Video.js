@@ -14,7 +14,7 @@ const Video = ({ playOnFragment, playbackRate, ...props }) => {
             videoRef.current.play();
         }
         else if (videoRef.current &&
-            playOnFragment &&
+            playOnFragment !== undefined &&
             fragment < playOnFragment) {
             videoRef.current.pause();
             videoRef.current.currentTime = 0;

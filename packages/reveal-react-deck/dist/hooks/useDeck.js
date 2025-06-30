@@ -15,6 +15,7 @@ const useDeckStore = create((set, get) => ({
     setCurrentSlide: (newSlide, id) => {
         set(() => ({ currentSlide: newSlide, currentSlideId: id }));
     },
+    getCurrentSlide: () => get().currentSlide,
     setFragmentCurrentSlide: (newFragment) => {
         set((state) => {
             const currentSlide = state.currentSlide;
@@ -24,7 +25,8 @@ const useDeckStore = create((set, get) => ({
         });
     },
     getFragmentCurrentSlide: () => {
-        return get().currentFragment[get().currentSlide];
+        const currentSlide = get().currentSlide;
+        return get().currentFragment[currentSlide];
     },
     toggleMotion: () => {
         set((state) => ({ motion: !state.motion }));
@@ -35,7 +37,7 @@ const useDeckStore = create((set, get) => ({
         if (!toast) {
             toast = document.createElement("div");
             toast.id = "motion-toast";
-            toast.classList.add(..."fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black opacity-50 text-white px-4 py-2 rounded".split(" "));
+            toast.classList.add(..."absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-black opacity-50 text-white px-4 py-2 rounded z-50".split(" "));
             document.body.appendChild(toast);
         }
         toast.textContent = `Motion ${get().motion ? "enabled" : "disabled"}`;

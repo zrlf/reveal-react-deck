@@ -3,27 +3,41 @@ import { BibFilePresenter, normalizeFieldValue } from "bibtex";
 import { useSectionContext } from "@/context/SectionScopeProvider";
 import React from "react";
 
-export const Ref = ({ id }: { id: string }) => {
-  const [index, setIndex] = useState(0);
+export const Ref = ({ id }: { id: string | string[] }) => {
+  const [index, setIndex] = useState<number[]>([]);
   const { references, setReferences } = useSectionContext();
 
   useEffect(() => {
-    // get index of the id in refs
-    let index = references.findIndex((ref) => ref === id);
-    if (index == -1) {
-      setReferences([id, ...references]);
-      index = 0;
+    const ids = Array.isArray(id) ? id : [id];
+
+    const newIndexes: number[] = [];
+
+    let updatedReferences = [...references];
+
+    for (const refId of ids) {
+      const refIdStr = refId.replace(/@/, "");
+      let idx = updatedReferences.indexOf(refIdStr);
+      if (idx === -1) {
+        updatedReferences = [refIdStr, ...updatedReferences];
+        idx = updatedReferences.length - 1;
+      }
+      newIndexes.push(idx);
     }
-    setIndex(index);
-  }, [references]);
+
+    if (updatedReferences.length !== references.length) {
+      setReferences(updatedReferences);
+    }
+
+    setIndex(newIndexes);
+  }, [id, references, setReferences]);
 
   return (
     <span
       className="text-xs text-foreground/50 align-super"
-      data-ref={id}
-      data-index={index}
+      data-ref={Array.isArray(id) ? id.join(",") : id}
+      data-index={index.join(",")}
     >
-      {index + 1}
+      {index.map((s) => s + 1).join(",")}
     </span>
   );
 };

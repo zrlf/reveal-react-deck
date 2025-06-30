@@ -9,35 +9,66 @@ type ImgProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   caption?: string;
   containerClass?: string;
   fillHeight?: boolean;
+  lazy?: boolean;
+  children?: React.ReactNode;
 };
 
 function getCaption(caption: string): React.ReactNode {
-  const match = caption.match(/^(.*?)\s\^(@\S+)/); // captures text before ^ and the cite key
+  const match = caption.match(/^(.*?)\s\^(@[\w\d,-@]+)/); // match text and ^@ref1,@ref2
+
   if (match) {
-    const [, text, citeKey] = match;
+    const [, text, citeGroup] = match;
+    const citeKeys = citeGroup
+      .split(",") // split by comma
+      .map((key) => key.replace(/^@/, "").trim());
+
     return (
       <span>
         {text}
-        <Ref id={citeKey} />
+        <Ref id={citeKeys} />
       </span>
     );
   } else {
-    return <span>{caption}</span>; // no citation found
+    return <span>{caption}</span>;
   }
 }
 
-export default function Img({ src, realSrc, caption, containerClass, fillHeight, ...rest }: ImgProps) {
+export default function Img({
+  children,
+  src,
+  realSrc,
+  caption,
+  containerClass,
+  fillHeight,
+  lazy = true,
+  ...rest
+}: ImgProps) {
   const { className, ...restProps } = rest;
   const srcToUse = src || realSrc;
 
+  if (lazy) {
+    restProps["data-src"] = srcToUse;
+  } else {
+    restProps["src"] = srcToUse;
+  }
+
   return (
-    <figure className={cn("m-0 flex flex-col", fillHeight && "h-full", containerClass)}>
+    <figure
+      className={cn(
+        "m-0 flex flex-col",
+        fillHeight && "h-full",
+        containerClass,
+      )}
+    >
       {/* image shrinks/grows to fill the remaining space */}
-      <img
-        data-src={srcToUse}
-        {...restProps}
-        className={cn("flex-1 min-h-0 w-full object-contain", className)}
-      />
+      {srcToUse ? (
+        <img
+          {...restProps}
+          className={cn("flex-1 min-h-0 w-full object-contain", className)}
+        />
+      ) : (
+        children
+      )}
 
       {/* caption keeps its own height */}
       {caption && (

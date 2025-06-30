@@ -1,0 +1,1 @@
+{"version":3,"file":"Tabs.d.ts","sourceRoot":"","sources":["../../src/components/Tabs.tsx"],"names":[],"mappings":"AACA,OAAO,KAA8B,MAAM,OAAO,CAAC;AAEnD,QAAA,MAAM,IAAI,GAAI,uCAIX;IACD,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;IAC1B,WAAW,EAAE,MAAM,EAAE,CAAC;IACtB,SAAS,CAAC,EAAE,MAAM,CAAC;CACpB,4CAkBA,CAAC;AAEF,OAAO,EAAE,IAAI,EAAE,CAAC"}

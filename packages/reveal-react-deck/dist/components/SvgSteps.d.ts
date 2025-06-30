@@ -1,9 +1,9 @@
 interface GroupProps {
     [key: string]: number;
 }
-declare const SvgSteps: ({ component: Component, groups, ...props }: {
-    component: React.FC<React.SVGProps<SVGSVGElement>>;
+declare const SvgSteps: ({ groups, children, ...props }: {
     groups: GroupProps;
-}) => import("react/jsx-runtime").JSX.Element;
+    children?: React.ReactElement;
+}) => import("react").DetailedReactHTMLElement<import("react").HTMLAttributes<HTMLElement>, HTMLElement> | null;
 export { SvgSteps };
 //# sourceMappingURL=SvgSteps.d.ts.map

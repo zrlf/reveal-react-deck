@@ -7,7 +7,7 @@
 .dark {
   --rv-primary: #e2e2e2;
   --rv-secondary: #666a74;
-  --rv-accent: #4d7dbf;
+  --rv-accent: #81b1d9;
 }
 
 @theme inline {
@@ -62,6 +62,8 @@
 @theme inline {
   --margin-content: var(--rv-content-margin);
   --padding-content: var(--rv-content-margin);
+  --margin-header: calc(var(--rv-title-bar-height) + var(--rv-content-margin));
+  --padding-header: calc(var(--rv-title-bar-height) + var(--rv-content-margin));
 
   --color-foreground: var(--rv-foreground);
   --color-background: var(--rv-background);

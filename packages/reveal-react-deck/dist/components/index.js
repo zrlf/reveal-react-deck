@@ -11,6 +11,7 @@ import { Ref } from "./Refs.js";
 import { Img, ImgHTML } from "./Img.js";
 import { Overlay } from "./Overlay.js";
 import { Admonition } from "./Admonition.js";
+import { Tabs } from "./Tabs.js";
 export { SlideNumber } from "./SlideNumber.js";
 const components = {
     Admonition,
@@ -27,6 +28,7 @@ const components = {
     },
     img: ImgHTML,
     Img,
+    Tabs,
 };
 const mdxComponents = (options) => {
     const footer = options.footer
