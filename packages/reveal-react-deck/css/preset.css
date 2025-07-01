@@ -11,13 +11,13 @@
 }
 
 :root {
-  --r-height: 1200px;
+  --r-height: 1080px;
   --r-width: 1920px;
 
   /* CSS variables */
   --rv-foreground: #0f0f0f;
   --rv-background: #fafafa;
-  --rv-font: Helvetica, Arial, sans-serif;
+  --rv-font: Helvetica, Inter, sans-serif;
   --rv-font-size: 24pt;
   --rv-content-margin: 1rem;
   --rv-title-background: transparent;

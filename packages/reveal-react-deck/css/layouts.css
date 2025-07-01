@@ -19,12 +19,10 @@
   }
 
   [data-slide-layout="hero"] {
-    h1 {
-      @apply absolute top-1/3 text-left self-start left-[calc(4*var(--rv-content-margin))];
-    }
-    @apply text-left items-start pl-[calc(4*var(--rv-content-margin))];
+    @apply text-left items-start justify-start pl-[calc(4*var(--rv-content-margin))];
     &[data-slide-content] {
-      padding-top: var(--rv-content-margin);
+      /* padding-top: var(--rv-content-margin); */
+      padding-top: calc(var(--r-height) / 3 + var(--rv-content-margin));
     }
   }
 
@@ -52,7 +50,7 @@
     @apply fixed z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
 
     &:has(> :nth-child(2)) > :first-child {
-      @apply text-muted-foreground;
+      @apply text-title/30;
     }
 
     & > *:not(:last-child)::after {
