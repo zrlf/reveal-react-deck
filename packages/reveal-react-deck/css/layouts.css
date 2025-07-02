@@ -26,6 +26,14 @@
     }
   }
 
+  [data-slide-layout="hero-with-title"] {
+    @apply text-left items-start justify-start pl-[calc(4*var(--rv-content-margin))];
+    &[data-slide-content] {
+      /* padding-top: var(--rv-content-margin); */
+      padding-top: calc(var(--r-height) / 3 + var(--rv-content-margin));
+    }
+  }
+
   [data-slide-layout="default"] {
     @apply justify-normal;
   }

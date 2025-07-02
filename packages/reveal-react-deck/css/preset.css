@@ -17,7 +17,7 @@
   /* CSS variables */
   --rv-foreground: #0f0f0f;
   --rv-background: #fafafa;
-  --rv-font: Helvetica, Inter, sans-serif;
+  --rv-font: Inter, sans-serif;
   --rv-font-size: 24pt;
   --rv-content-margin: 1rem;
   --rv-title-background: transparent;
@@ -66,7 +66,7 @@ html {
 }
 
 body {
-  font-family: var(--rv-font), Helvetica, Arial, sans-serif;
+  font-family: var(--rv-font);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }

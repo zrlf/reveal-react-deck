@@ -52,10 +52,12 @@ function RevealSlides({
   slides,
   options,
   revealOptions,
+  plugins = [RevealHighlight],
 }: {
   slides: SlideFile[];
   options?: Options;
   revealOptions?: Reveal.Options;
+  plugins?: Reveal.PluginFunction[];
 }) {
   const deckDivRef = useRef<HTMLDivElement>(null);
   const deckRef = useRef<Reveal.Api | null>(null);
@@ -64,6 +66,7 @@ function RevealSlides({
     options: revealOptions,
     deckDivRef,
     deckRef,
+    plugins,
   });
 
   return (
@@ -81,10 +84,12 @@ const useReveal = ({
   options,
   deckDivRef,
   deckRef,
+  plugins,
 }: {
   options?: any;
   deckDivRef: React.RefObject<HTMLDivElement | null>;
   deckRef: React.MutableRefObject<Reveal.Api | null>;
+  plugins: Reveal.PluginFunction[];
 }) => {
   // Load zustand store
   const deckStore = useDeckStore();
@@ -99,7 +104,7 @@ const useReveal = ({
 
     deckRef.current
       .initialize({
-        plugins: [RevealHighlight],
+        plugins,
       })
       .then(() => {
         const deck = deckRef.current!;

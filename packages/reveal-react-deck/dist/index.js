@@ -19,17 +19,18 @@ const Slides = ({ slides, revealRef, }) => {
             return _jsx(SlideContent.default, {}, index);
         }) }));
 };
-function RevealSlides({ slides, options, revealOptions, }) {
+function RevealSlides({ slides, options, revealOptions, plugins = [RevealHighlight], }) {
     const deckDivRef = useRef(null);
     const deckRef = useRef(null);
     useReveal({
         options: revealOptions,
         deckDivRef,
         deckRef,
+        plugins,
     });
     return (_jsx("div", { className: "reveal", ref: deckDivRef, children: _jsx(MDXProvider, { components: mdxComponents(options || {}), children: _jsx("div", { className: "slides", children: _jsx(Slides, { slides: slides, revealRef: deckRef }) }) }) }));
 }
-const useReveal = ({ options, deckDivRef, deckRef, }) => {
+const useReveal = ({ options, deckDivRef, deckRef, plugins, }) => {
     // Load zustand store
     const deckStore = useDeckStore();
     useEffect(() => {
@@ -42,7 +43,7 @@ const useReveal = ({ options, deckDivRef, deckRef, }) => {
         });
         deckRef.current
             .initialize({
-            plugins: [RevealHighlight],
+            plugins,
         })
             .then(() => {
             const deck = deckRef.current;
