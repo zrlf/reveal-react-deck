@@ -24,6 +24,6 @@ const Slide = ({ frontmatter, children, footer, header, }) => {
     if (frontmatter.hidden) {
         return null;
     }
-    return (_jsxs(SectionScopeProvider, { ...frontmatter.reveal, className: cn(frontmatter.dark && "dark"), children: [header, frontmatter.layout !== "full" && frontmatter.layout !== "hero" && (_jsxs("div", { "data-slide-title": true, children: [_jsx("h1", { dangerouslySetInnerHTML: { __html: frontmatter.title || "" } }), frontmatter.subtitle && (_jsx("h2", { dangerouslySetInnerHTML: { __html: frontmatter.subtitle } }))] })), _jsx(SlideTemplate, { frontmatter: frontmatter, className: frontmatter.className, children: children }), footer] }));
+    return (_jsxs(SectionScopeProvider, { ...frontmatter.reveal, className: cn(frontmatter.dark && "dark", frontmatter.sectionClassName), children: [header, frontmatter.layout !== "full" && frontmatter.layout !== "hero" && (_jsxs("div", { "data-slide-title": true, children: [_jsx("h1", { dangerouslySetInnerHTML: { __html: frontmatter.title || "" } }), frontmatter.subtitle && (_jsx("h2", { dangerouslySetInnerHTML: { __html: frontmatter.subtitle } }))] })), _jsx(SlideTemplate, { frontmatter: frontmatter, className: frontmatter.className, children: children }), footer] }));
 };
 export { Slide };

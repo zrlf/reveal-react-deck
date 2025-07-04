@@ -5,12 +5,13 @@ import { MDXProvider } from "@mdx-js/react";
 import Reveal from "reveal.js";
 import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "./components/index.js";
-const Slides = ({ slides, revealRef, }) => {
+const Slides = ({ slides }) => {
     useEffect(() => {
-        if (revealRef.current) {
-            const { indexh, indexf } = revealRef.current.getState();
-            revealRef.current.sync();
-            revealRef.current.slide(indexh, 0, indexf);
+        const reveal = useDeckStore.getState().deck;
+        if (reveal) {
+            const { indexh, indexf } = reveal.getState();
+            reveal.sync();
+            reveal.slide(indexh, 0, indexf);
         }
     }, [slides]);
     return (_jsx(_Fragment, { children: slides.map((SlideContent, index) => {
@@ -21,61 +22,56 @@ const Slides = ({ slides, revealRef, }) => {
 };
 function RevealSlides({ slides, options, revealOptions, plugins = [RevealHighlight], }) {
     const deckDivRef = useRef(null);
-    const deckRef = useRef(null);
     useReveal({
         options: revealOptions,
         deckDivRef,
-        deckRef,
         plugins,
     });
-    return (_jsx("div", { className: "reveal", ref: deckDivRef, children: _jsx(MDXProvider, { components: mdxComponents(options || {}), children: _jsx("div", { className: "slides", children: _jsx(Slides, { slides: slides, revealRef: deckRef }) }) }) }));
+    return (_jsx("div", { className: "reveal", ref: deckDivRef, children: _jsx(MDXProvider, { components: mdxComponents(options || {}), children: _jsx("div", { className: "slides", children: _jsx(Slides, { slides: slides }) }) }) }));
 }
-const useReveal = ({ options, deckDivRef, deckRef, plugins, }) => {
-    // Load zustand store
-    const deckStore = useDeckStore();
+const useReveal = ({ options, deckDivRef, plugins, }) => {
+    const deck = useDeckStore((state) => state.deck);
     useEffect(() => {
-        if (deckRef.current)
+        if (deck)
             return;
         if (!deckDivRef.current)
             return;
-        deckRef.current = new Reveal(deckDivRef.current, {
+        const newdeck = new Reveal(deckDivRef.current, {
             ...options,
         });
-        deckRef.current
+        newdeck
             .initialize({
             plugins,
         })
             .then(() => {
-            const deck = deckRef.current;
-            deckStore.setDeck(deck);
-            deck.on("overviewshown", () => {
+            useDeckStore.setState({ deck: newdeck });
+            newdeck.on("overviewshown", () => {
                 useDeckStore.setState({ isOverview: true });
                 window.localStorage.setItem("isOverview", "true");
             });
-            deck.on("overviewhidden", () => {
+            newdeck.on("overviewhidden", () => {
                 useDeckStore.setState({ isOverview: false });
                 window.localStorage.setItem("isOverview", "false");
             });
-            deck.on("slidechanged", (_event) => {
+            newdeck.on("slidechanged", (_event) => {
                 const event = _event;
-                deckStore.setCurrentSlide(event.indexh, event.currentSlide.id);
+                useDeckStore.getState().setCurrentSlide(event.indexh, event.currentSlide.id);
             });
-            deck.on("fragmentshown", (_event) => {
+            newdeck.on("fragmentshown", (_event) => {
                 const event = _event;
                 let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex);
-                deckStore.setFragmentCurrentSlide(fragmentIndex + 1);
+                useDeckStore.getState().setFragmentCurrentSlide(fragmentIndex + 1);
             });
-            deck.on("fragmenthidden", (_event) => {
+            newdeck.on("fragmenthidden", (_event) => {
                 const event = _event;
                 let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex);
-                deckStore.setFragmentCurrentSlide(fragmentIndex);
+                useDeckStore.getState().setFragmentCurrentSlide(fragmentIndex);
             });
         });
         return () => {
             try {
-                if (deckRef.current) {
-                    deckRef.current.destroy();
-                    deckRef.current = null;
+                if (newdeck) {
+                    newdeck.destroy();
                 }
             }
             catch (e) {
@@ -88,9 +84,6 @@ const useReveal = ({ options, deckDivRef, deckRef, plugins, }) => {
             deckDivRef.current
                 ?.querySelector(".slides")
                 .classList.toggle("slides-border");
-        }
-        if (event.key === "M") {
-            deckStore.toggleMotion();
         }
     }, []);
     useEffect(() => {

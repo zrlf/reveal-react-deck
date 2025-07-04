@@ -10,6 +10,8 @@ interface Frontmatter {
     fragments?: number;
     dark?: boolean;
     className?: string;
+    sectionClassName?: string;
+    backup?: boolean;
 }
 interface SlideProps {
     frontmatter: Frontmatter;

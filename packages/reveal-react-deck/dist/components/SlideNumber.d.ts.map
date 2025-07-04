@@ -1,1 +1,1 @@
-{"version":3,"file":"SlideNumber.d.ts","sourceRoot":"","sources":["../../src/components/SlideNumber.tsx"],"names":[],"mappings":"AAGA,eAAO,MAAM,WAAW,GAAI,2BAGzB;IACD,SAAS,EAAE,OAAO,CAAC;IACnB,SAAS,EAAE,MAAM,CAAC;CACnB,4CAQA,CAAC"}
+{"version":3,"file":"SlideNumber.d.ts","sourceRoot":"","sources":["../../src/components/SlideNumber.tsx"],"names":[],"mappings":"AAIA,eAAO,MAAM,WAAW,GAAI,2BAGzB;IACD,SAAS,EAAE,OAAO,CAAC;IACnB,SAAS,EAAE,MAAM,CAAC;CACnB,4CAuBA,CAAC"}
