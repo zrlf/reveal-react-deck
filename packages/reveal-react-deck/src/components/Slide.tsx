@@ -18,6 +18,8 @@ interface Frontmatter {
   fragments?: number;
   dark?: boolean;
   className?: string;
+  sectionClassName?: string;
+  backup?: boolean;
 }
 
 interface SlideProps {
@@ -75,10 +77,11 @@ const Slide: React.FC<SlideProps> = ({
   if (frontmatter.hidden) {
     return null;
   }
+
   return (
     <SectionScopeProvider
       {...frontmatter.reveal}
-      className={cn(frontmatter.dark && "dark")}
+      className={cn(frontmatter.dark && "dark", frontmatter.sectionClassName)}
     >
       {/* Optionally render frontmatter content */}
       {header}

@@ -22,9 +22,10 @@ const Video = ({
     if (isPresent && fragment === playOnFragment && videoRef.current) {
       videoRef.current.play();
     } else if (
-      videoRef.current &&
-      playOnFragment !== undefined &&
-      fragment < playOnFragment
+      (videoRef.current &&
+        playOnFragment !== undefined &&
+        fragment < playOnFragment) ||
+      (!isPresent && videoRef.current)
     ) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
