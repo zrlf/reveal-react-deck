@@ -148,7 +148,7 @@ body {
   }
 
   ul li {
-    @apply list-disc marker:text-foreground/50;
+    @apply list-disc marker:text-[currentColor]/50;
   }
 
   ol li {

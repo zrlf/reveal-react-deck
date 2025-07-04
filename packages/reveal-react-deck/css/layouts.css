@@ -55,7 +55,7 @@
   /* Slide title  */
   /* -------------- */
   [data-slide-title] {
-    @apply fixed z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
+    @apply sticky top-0 z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
 
     &:has(> :nth-child(2)) > :first-child {
       @apply text-title/30;
