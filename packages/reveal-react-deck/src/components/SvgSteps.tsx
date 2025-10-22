@@ -7,10 +7,12 @@ interface GroupProps {
 const SvgSteps = ({
   groups,
   children,
+  currentVisible = false,
   ...props
 }: {
   groups: GroupProps;
   children?: React.ReactElement;
+  currentVisible?: boolean;
 }) => {
   // const { fragment, isPresent } = useSectionContext();
   const svgRef = useRef<SVGSVGElement>(null);
@@ -24,6 +26,9 @@ const SvgSteps = ({
           // groupElement.style.display = fragment >= value ? "block" : "none";
           groupElement.classList.add("fragment");
           groupElement.classList.add("appear");
+          if (currentVisible) {
+            groupElement.classList.add("current-visible");
+          }
           groupElement.setAttribute("data-fragment-index", value.toString());
         }
       });
