@@ -6,6 +6,7 @@ import {
 } from "@/context/SectionScopeProvider";
 import { DummyFragments } from "./DummyFragment";
 import { cn } from "@/utils";
+import { useDeckStore } from "@/hooks/useDeck";
 
 interface Frontmatter {
   title?: string;

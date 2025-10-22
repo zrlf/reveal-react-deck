@@ -11,6 +11,7 @@ interface DeckStore {
   // Slide number
   totalNumberOfSlides: number;
   currentSlide: number;
+  backupSlides: number;
   // Slide id
   currentSlideId: string;
   // Overview
@@ -127,6 +128,7 @@ const useDeckStore = create<DeckStore>((set, get) => ({
   // default values
   deck: null,
   totalNumberOfSlides: -1,
+  backupSlides: 0,
   currentSlide: -1,
   currentSlideId: "",
   isOverview: false,

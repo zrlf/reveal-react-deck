@@ -278,6 +278,16 @@ span.fragment.word-highlight {
   display: none;
 }
 
+.reveal-notes {
+  &::before {
+    content: "Notes";
+    @apply absolute top-0 left-0 m-0 pl-4 pt-2 uppercase;
+    @apply text-xs font-semibold;
+  }
+  @apply fixed inset-0 bottom-auto z-50 bg-amber-200/90 p-4 m-4 pt-8 max-w-xl overflow-y-scroll;
+  max-height: calc(100vh - 2rem);
+}
+
 /* -------------- */
 /* Code styling   */
 /* -------------- */
