@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, useEffect, useRef } from "react";
-const SvgSteps = ({ groups, children, ...props }) => {
+const SvgSteps = ({ groups, children, currentVisible = false, ...props }) => {
     // const { fragment, isPresent } = useSectionContext();
     const svgRef = useRef(null);
     useEffect(() => {
@@ -12,6 +12,9 @@ const SvgSteps = ({ groups, children, ...props }) => {
                     // groupElement.style.display = fragment >= value ? "block" : "none";
                     groupElement.classList.add("fragment");
                     groupElement.classList.add("appear");
+                    if (currentVisible) {
+                        groupElement.classList.add("current-visible");
+                    }
                     groupElement.setAttribute("data-fragment-index", value.toString());
                 }
             });

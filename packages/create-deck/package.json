@@ -1,11 +1,12 @@
 {
   "name": "create-deck",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "preversion": "pnpm run build"
   },
   "files": [
     "dist",

@@ -71,6 +71,7 @@ const useDeckStore = create((set, get) => ({
     // default values
     deck: null,
     totalNumberOfSlides: -1,
+    backupSlides: 0,
     currentSlide: -1,
     currentSlideId: "",
     isOverview: false,

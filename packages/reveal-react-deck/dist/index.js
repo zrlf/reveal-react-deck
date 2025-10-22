@@ -44,7 +44,7 @@ const useReveal = ({ options, deckDivRef, plugins, }) => {
             plugins,
         })
             .then(() => {
-            useDeckStore.setState({ deck: newdeck });
+            useDeckStore.getState().setDeck(newdeck);
             newdeck.on("overviewshown", () => {
                 useDeckStore.setState({ isOverview: true });
                 window.localStorage.setItem("isOverview", "true");
@@ -55,7 +55,13 @@ const useReveal = ({ options, deckDivRef, plugins, }) => {
             });
             newdeck.on("slidechanged", (_event) => {
                 const event = _event;
-                useDeckStore.getState().setCurrentSlide(event.indexh, event.currentSlide.id);
+                useDeckStore
+                    .getState()
+                    .setCurrentSlide(event.indexh, event.currentSlide.id);
+                const notesElement = document.querySelector(".reveal-notes");
+                if (notesElement) {
+                    notesElement.innerHTML = newdeck.getSlideNotes(newdeck.getCurrentSlide()) || "no notes";
+                }
             });
             newdeck.on("fragmentshown", (_event) => {
                 const event = _event;
@@ -84,6 +90,23 @@ const useReveal = ({ options, deckDivRef, plugins, }) => {
             deckDivRef.current
                 ?.querySelector(".slides")
                 .classList.toggle("slides-border");
+        }
+        if (event.key === "i") {
+            function showNotes(notes) {
+                const notesElement = document.createElement("div");
+                notesElement.className = "reveal-notes";
+                notesElement.innerHTML = notes || "no notes";
+                document.body.appendChild(notesElement);
+            }
+            const notesElement = document.querySelector(".reveal-notes");
+            if (notesElement) {
+                notesElement.remove();
+            }
+            else {
+                const reveal = useDeckStore.getState().deck;
+                const notes = reveal.getSlideNotes(reveal.getCurrentSlide());
+                showNotes(notes);
+            }
         }
     }, []);
     useEffect(() => {

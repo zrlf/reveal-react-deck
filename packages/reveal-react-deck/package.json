@@ -1,6 +1,6 @@
 {
   "name": "reveal-react-deck",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "scripts": {
     "build": "pnpm build:layout && pnpm build:mdx-plugins",
@@ -9,7 +9,8 @@
     "clean": "rimraf dist",
     "dev": "concurrently \"tsc -w --project tsconfig.build.json\" \"tsc-alias -w -p tsconfig.build.json\"",
     "lint": "eslint .",
-    "types:check": "tsc --noEmit"
+    "types:check": "tsc --noEmit",
+    "preversion": "pnpm run build"
   },
   "exports": {
     ".": "./dist/index.js",

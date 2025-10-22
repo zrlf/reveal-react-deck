@@ -4,6 +4,7 @@ interface DeckStore {
     deck: Reveal.Api | null;
     totalNumberOfSlides: number;
     currentSlide: number;
+    backupSlides: number;
     currentSlideId: string;
     isOverview: boolean;
     currentFragment: number[];
