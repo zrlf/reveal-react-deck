@@ -78,7 +78,7 @@ const useReveal = ({
   deckDivRef,
   plugins,
 }: {
-  options?: any;
+  options?: Reveal.Options;
   deckDivRef: React.RefObject<HTMLDivElement | null>;
   plugins: Reveal.PluginFunction[];
 }) => {

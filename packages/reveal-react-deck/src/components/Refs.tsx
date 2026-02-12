@@ -48,8 +48,7 @@ function getRefString(id: string, bib: BibFilePresenter) {
     return <li key={id}>{id}</li>;
   }
   const author = refItem.getField("author");
-  // @ts-expect-error
-  const authorList = author.authors$.map((author) => author.lastNames);
+  const authorList = (author as any).authors$?.map((a: any) => a.lastNames) || [];
   const journal = normalizeFieldValue(refItem.getField("journal")) || "arXiv";
   const year = normalizeFieldValue(refItem.getField("year"));
   return (
