@@ -100,11 +100,15 @@ const useReveal = ({
         useDeckStore.getState().setDeck(newdeck);
         newdeck.on("overviewshown", () => {
           useDeckStore.setState({ isOverview: true });
-          window.localStorage.setItem("isOverview", "true");
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("isOverview", "true");
+          }
         });
         newdeck.on("overviewhidden", () => {
           useDeckStore.setState({ isOverview: false });
-          window.localStorage.setItem("isOverview", "false");
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("isOverview", "false");
+          }
         });
         newdeck.on("slidechanged", (_event: Event) => {
           const event = _event as RevealEvent;

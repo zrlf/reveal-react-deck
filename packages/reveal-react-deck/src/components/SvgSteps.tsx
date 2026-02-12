@@ -14,16 +14,13 @@ const SvgSteps = ({
   children?: React.ReactElement;
   currentVisible?: boolean;
 }) => {
-  // const { fragment, isPresent } = useSectionContext();
   const svgRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
     const svgElement = svgRef.current;
     if (svgElement) {
-      // Find the <g> element with id="show_2" and hide it
       Object.entries(groups).forEach(([key, value]) => {
         const groupElement = svgElement.querySelector(`#${key}`);
         if (groupElement) {
-          // groupElement.style.display = fragment >= value ? "block" : "none";
           groupElement.classList.add("fragment");
           groupElement.classList.add("appear");
           if (currentVisible) {
@@ -38,8 +35,7 @@ const SvgSteps = ({
   if (!children || !isValidElement(children)) {
     return null;
   }
-  // @ts-ignore
-  return cloneElement(children, { ref: svgRef, ...props });
+  return cloneElement(children, { ref: svgRef, ...props } as any);
 };
 
 export { SvgSteps };

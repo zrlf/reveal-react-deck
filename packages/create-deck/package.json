@@ -6,6 +6,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "lint": "eslint .",
+    "clean": "rimraf dist",
+    "types:check": "tsc --noEmit",
     "preversion": "pnpm run build"
   },
   "files": [
@@ -25,8 +28,14 @@
     "fs-extra": "^11.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.18.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.15.0",
-    "tsup": "^8.4.0"
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.22.0"
   }
 }
