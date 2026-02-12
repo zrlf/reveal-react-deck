@@ -3,6 +3,10 @@ import { BibFilePresenter, normalizeFieldValue } from "bibtex";
 import { useSectionContext } from "@/context/SectionScopeProvider";
 import React from "react";
 
+type BibAuthor = {
+  authors$?: Array<{ lastNames: string }>;
+};
+
 export const Ref = ({ id }: { id: string | string[] }) => {
   const [index, setIndex] = useState<number[]>([]);
   const { references, setReferences } = useSectionContext();
@@ -47,8 +51,8 @@ function getRefString(id: string, bib: BibFilePresenter) {
   if (!refItem) {
     return <li key={id}>{id}</li>;
   }
-  const author = refItem.getField("author");
-  const authorList = (author as any).authors$?.map((a: any) => a.lastNames) || [];
+  const author = refItem.getField("author") as BibAuthor;
+  const authorList = author.authors$?.map((a) => a.lastNames) || [];
   const journal = normalizeFieldValue(refItem.getField("journal")) || "arXiv";
   const year = normalizeFieldValue(refItem.getField("year"));
   return (

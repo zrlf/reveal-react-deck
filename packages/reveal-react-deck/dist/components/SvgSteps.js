@@ -20,6 +20,9 @@ const SvgSteps = ({ groups, children, currentVisible = false, ...props }) => {
     if (!children || !isValidElement(children)) {
         return null;
     }
-    return cloneElement(children, { ref: svgRef, ...props });
+    return cloneElement(children, {
+        ...props,
+        ref: svgRef,
+    });
 };
 export { SvgSteps };

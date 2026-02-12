@@ -4,16 +4,18 @@ interface GroupProps {
   [key: string]: number;
 }
 
+type SvgStepsProps = {
+  groups: GroupProps;
+  children?: React.ReactElement;
+  currentVisible?: boolean;
+};
+
 const SvgSteps = ({
   groups,
   children,
   currentVisible = false,
   ...props
-}: {
-  groups: GroupProps;
-  children?: React.ReactElement;
-  currentVisible?: boolean;
-}) => {
+}: SvgStepsProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
     const svgElement = svgRef.current;
@@ -35,7 +37,11 @@ const SvgSteps = ({
   if (!children || !isValidElement(children)) {
     return null;
   }
-  return cloneElement(children, { ref: svgRef, ...props } as any);
+  
+  return cloneElement(children, {
+    ...props,
+    ref: svgRef,
+  } as React.SVGProps<SVGSVGElement> & { ref: typeof svgRef });
 };
 
 export { SvgSteps };
