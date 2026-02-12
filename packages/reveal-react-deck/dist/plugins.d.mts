@@ -1,4 +1,6 @@
-declare function rehypeRemoveLonelyParagraph(): (tree: any) => void;
+import { Root } from 'hast';
+
+declare function rehypeRemoveLonelyParagraph(): (tree: Root) => void;
 
 declare function rehypeRemoveWrappingP(): (tree: any) => void;
 

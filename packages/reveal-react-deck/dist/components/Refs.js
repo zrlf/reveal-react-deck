@@ -32,8 +32,7 @@ function getRefString(id, bib) {
         return _jsx("li", { children: id }, id);
     }
     const author = refItem.getField("author");
-    // @ts-expect-error
-    const authorList = author.authors$.map((author) => author.lastNames);
+    const authorList = author.authors$?.map((a) => a.lastNames) || [];
     const journal = normalizeFieldValue(refItem.getField("journal")) || "arXiv";
     const year = normalizeFieldValue(refItem.getField("year"));
     return (_jsxs("li", { children: [_jsxs("i", { children: [authorList[0], " et al."] }), ", ", _jsx("b", { children: journal }), ", ", year] }, id));

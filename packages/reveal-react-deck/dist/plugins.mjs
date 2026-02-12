@@ -198,9 +198,7 @@ function visit(tree, testOrVisitor, visitorOrReverse, maybeReverse) {
 function rehypeRemoveLonelyParagraph() {
   return (tree) => {
     visit(tree, "element", (node, _i, parent) => {
-      if (node.tagName === "p" && // it’s a <p>
-      parent?.type === "element" && // parent is an element
-      parent.children.length === 1) {
+      if (node.tagName === "p" && parent?.type === "element" && parent.children.length === 1) {
         parent.children = node.children;
       }
     });

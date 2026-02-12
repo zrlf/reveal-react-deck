@@ -18,7 +18,7 @@ const components = {
     Video,
     OnFragment,
     DummyFragments,
-    Fragment: (props) => _jsx("div", { className: "fragment", ...props }),
+    Fragment: (props) => (_jsx("div", { className: "fragment", ...props })),
     Conclusion,
     Overlay,
     Card,

@@ -23,7 +23,7 @@ declare const components: {
     DummyFragments: ({ n }: {
         n: number;
     }) => import("react/jsx-runtime").JSX.Element;
-    Fragment: (props: any) => import("react/jsx-runtime").JSX.Element;
+    Fragment: (props: React.HTMLAttributes<HTMLDivElement>) => import("react/jsx-runtime").JSX.Element;
     Conclusion: ({ children, fragment, className, }: {
         children: React.ReactNode;
         fragment?: boolean;
@@ -42,8 +42,13 @@ declare const components: {
     Ref: ({ id }: {
         id: string | string[];
     }) => import("react/jsx-runtime").JSX.Element;
-    code: (props: any) => import("react/jsx-runtime").JSX.Element;
-    img: (props: any) => import("react/jsx-runtime").JSX.Element;
+    code: (props: React.HTMLAttributes<HTMLElement> & {
+        className?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
+    img: (props: React.ImgHTMLAttributes<HTMLImageElement> & {
+        alt?: string;
+        title?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
     Img: typeof Img;
     Tabs: ({ children, breakpoints, className, }: {
         children: React.ReactNode;
@@ -73,7 +78,7 @@ declare const mdxComponents: (options: Options) => {
     DummyFragments: ({ n }: {
         n: number;
     }) => import("react/jsx-runtime").JSX.Element;
-    Fragment: (props: any) => import("react/jsx-runtime").JSX.Element;
+    Fragment: (props: React.HTMLAttributes<HTMLDivElement>) => import("react/jsx-runtime").JSX.Element;
     Conclusion: ({ children, fragment, className, }: {
         children: React.ReactNode;
         fragment?: boolean;
@@ -92,8 +97,13 @@ declare const mdxComponents: (options: Options) => {
     Ref: ({ id }: {
         id: string | string[];
     }) => import("react/jsx-runtime").JSX.Element;
-    code: (props: any) => import("react/jsx-runtime").JSX.Element;
-    img: (props: any) => import("react/jsx-runtime").JSX.Element;
+    code: (props: React.HTMLAttributes<HTMLElement> & {
+        className?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
+    img: (props: React.ImgHTMLAttributes<HTMLImageElement> & {
+        alt?: string;
+        title?: string;
+    }) => import("react/jsx-runtime").JSX.Element;
     Img: typeof Img;
     Tabs: ({ children, breakpoints, className, }: {
         children: React.ReactNode;
