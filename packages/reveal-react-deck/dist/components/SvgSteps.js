@@ -20,6 +20,7 @@ const SvgSteps = ({ groups, children, currentVisible = false, ...props }) => {
     if (!children || !isValidElement(children)) {
         return null;
     }
+    // Type assertion needed because cloneElement doesn't accept ref in its generic type
     return cloneElement(children, {
         ...props,
         ref: svgRef,

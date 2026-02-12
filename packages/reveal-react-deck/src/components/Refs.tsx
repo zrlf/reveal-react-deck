@@ -51,8 +51,12 @@ function getRefString(id: string, bib: BibFilePresenter) {
   if (!refItem) {
     return <li key={id}>{id}</li>;
   }
-  const author = refItem.getField("author") as BibAuthor;
-  const authorList = author.authors$?.map((a) => a.lastNames) || [];
+  const author = refItem.getField("author");
+  const isBibAuthor = (obj: unknown): obj is BibAuthor => 
+    typeof obj === "object" && obj !== null && "authors$" in obj;
+  const authorList = isBibAuthor(author) 
+    ? author.authors$?.map((a) => a.lastNames) || []
+    : [];
   const journal = normalizeFieldValue(refItem.getField("journal")) || "arXiv";
   const year = normalizeFieldValue(refItem.getField("year"));
   return (

@@ -38,10 +38,11 @@ const SvgSteps = ({
     return null;
   }
   
+  // Type assertion needed because cloneElement doesn't accept ref in its generic type
   return cloneElement(children, {
     ...props,
     ref: svgRef,
-  } as React.SVGProps<SVGSVGElement> & { ref: typeof svgRef });
+  } as Partial<React.SVGProps<SVGSVGElement>>);
 };
 
 export { SvgSteps };

@@ -32,7 +32,10 @@ function getRefString(id, bib) {
         return _jsx("li", { children: id }, id);
     }
     const author = refItem.getField("author");
-    const authorList = author.authors$?.map((a) => a.lastNames) || [];
+    const isBibAuthor = (obj) => typeof obj === "object" && obj !== null && "authors$" in obj;
+    const authorList = isBibAuthor(author)
+        ? author.authors$?.map((a) => a.lastNames) || []
+        : [];
     const journal = normalizeFieldValue(refItem.getField("journal")) || "arXiv";
     const year = normalizeFieldValue(refItem.getField("year"));
     return (_jsxs("li", { children: [_jsxs("i", { children: [authorList[0], " et al."] }), ", ", _jsx("b", { children: journal }), ", ", year] }, id));
