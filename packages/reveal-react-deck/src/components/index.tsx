@@ -20,12 +20,14 @@ const components = {
   Video,
   OnFragment,
   DummyFragments,
-  Fragment: (props) => <div className="fragment" {...props} />,
+  Fragment: (props: React.HTMLAttributes<HTMLDivElement>) => (
+    <div className="fragment" {...props} />
+  ),
   Conclusion,
   Overlay,
   Card,
   Ref,
-  code: (props: any) => {
+  code: (props: React.HTMLAttributes<HTMLElement> & { className?: string }) => {
     return <code {...props} className={`language-${props.className}`} />;
   },
   img: ImgHTML,

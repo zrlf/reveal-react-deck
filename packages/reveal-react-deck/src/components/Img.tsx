@@ -80,10 +80,15 @@ export default function Img({
   );
 }
 
-const ImgHTML = (props: any) => {
+type ImgHTMLProps = React.ImgHTMLAttributes<HTMLImageElement> & {
+  alt?: string;
+  title?: string;
+};
+
+const ImgHTML = (props: ImgHTMLProps) => {
   const altClasses = props.alt
     ?.split(" ")
-    .filter((c: string) => c.startsWith("."))
+    .filter((c) => c.startsWith("."))
     .join(" ")
     .replace(/\./g, "");
 
@@ -105,7 +110,11 @@ const ImgHTML = (props: any) => {
   );
 };
 
-const ImageRow = (props: any) => (
+type ImageRowProps = React.HTMLAttributes<HTMLDivElement> & {
+  children?: React.ReactNode;
+};
+
+const ImageRow = (props: ImageRowProps) => (
   <div className={cn(props.className, "flex gap-4 items-center")}>
     {props.children}
   </div>

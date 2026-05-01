@@ -2,7 +2,6 @@ import { useDeckStore } from "@/hooks/useDeck";
 import { useCallback, useEffect, useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Reveal from "reveal.js";
-import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "@/components";
 import { Options } from "./config";
 
@@ -47,7 +46,7 @@ function RevealSlides({
   slides,
   options,
   revealOptions,
-  plugins = [RevealHighlight],
+  plugins = [],
 }: {
   slides: SlideFile[];
   options?: Options;
@@ -78,7 +77,7 @@ const useReveal = ({
   deckDivRef,
   plugins,
 }: {
-  options?: any;
+  options?: Reveal.Options;
   deckDivRef: React.RefObject<HTMLDivElement | null>;
   plugins: Reveal.PluginFunction[];
 }) => {
@@ -100,11 +99,15 @@ const useReveal = ({
         useDeckStore.getState().setDeck(newdeck);
         newdeck.on("overviewshown", () => {
           useDeckStore.setState({ isOverview: true });
-          window.localStorage.setItem("isOverview", "true");
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("isOverview", "true");
+          }
         });
         newdeck.on("overviewhidden", () => {
           useDeckStore.setState({ isOverview: false });
-          window.localStorage.setItem("isOverview", "false");
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("isOverview", "false");
+          }
         });
         newdeck.on("slidechanged", (_event: Event) => {
           const event = _event as RevealEvent;
@@ -113,17 +116,18 @@ const useReveal = ({
             .setCurrentSlide(event.indexh, event.currentSlide.id);
           const notesElement = document.querySelector(".reveal-notes");
           if (notesElement) {
-            notesElement.innerHTML = newdeck.getSlideNotes(newdeck.getCurrentSlide()) || "no notes";
+            notesElement.innerHTML =
+              newdeck.getSlideNotes(newdeck.getCurrentSlide()) || "no notes";
           }
         });
         newdeck.on("fragmentshown", (_event: Event) => {
           const event = _event as Event & { fragment: HTMLElement };
-          let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
+          const fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
           useDeckStore.getState().setFragmentCurrentSlide(fragmentIndex + 1);
         });
         newdeck.on("fragmenthidden", (_event: Event) => {
           const event = _event as Event & { fragment: HTMLElement };
-          let fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
+          const fragmentIndex = parseInt(event.fragment.dataset.fragmentIndex!);
           useDeckStore.getState().setFragmentCurrentSlide(fragmentIndex);
         });
       });
@@ -133,7 +137,7 @@ const useReveal = ({
         if (newdeck) {
           newdeck.destroy();
         }
-      } catch (e) {
+      } catch {
         console.warn("Reveal.js destroy call failed");
       }
     };

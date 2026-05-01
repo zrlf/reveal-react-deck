@@ -41,7 +41,7 @@ export const Box = (props) => {
   );
 };
 
-var emojisMap = {
+const emojisMap = {
   warning: "⚠️",
   important: "❗️",
   caution: "🔥",

@@ -85,6 +85,10 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Build output
+dist/
+*.tsbuildinfo
+
 # General
 .DS_Store
 .AppleDouble

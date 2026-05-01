@@ -1,4 +1,5 @@
 @layer base {
+
   /* Slide layouts */
   [data-slide-content] {
     @apply flex flex-col gap-2 justify-center items-center;
@@ -20,6 +21,7 @@
 
   [data-slide-layout="hero"] {
     @apply text-left items-start justify-start pl-[calc(4*var(--rv-content-margin))];
+
     &[data-slide-content] {
       /* padding-top: var(--rv-content-margin); */
       padding-top: calc(var(--r-height) / 3 + var(--rv-content-margin));
@@ -28,6 +30,7 @@
 
   [data-slide-layout="hero-with-title"] {
     @apply text-left items-start justify-start pl-[calc(4*var(--rv-content-margin))];
+
     &[data-slide-content] {
       /* padding-top: var(--rv-content-margin); */
       padding-top: calc(var(--r-height) / 3 + var(--rv-content-margin));
@@ -57,16 +60,16 @@
   [data-slide-title] {
     @apply sticky top-0 z-20 h-(--rv-title-bar-height) px-content w-full flex items-center;
 
-    &:has(> :nth-child(2)) > :first-child {
+    &:has(> :nth-child(2))> :first-child {
       @apply text-title/30;
     }
 
-    & > *:not(:last-child)::after {
+    &>*:not(:last-child)::after {
       @apply content-['/'] mx-2;
     }
 
-    > h1,
-    > h2 {
+    >h1,
+    >h2 {
       @apply my-0 normal-case text-lg font-normal italic;
     }
 

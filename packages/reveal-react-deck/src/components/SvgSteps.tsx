@@ -4,26 +4,25 @@ interface GroupProps {
   [key: string]: number;
 }
 
+type SvgStepsProps = {
+  groups: GroupProps;
+  children?: React.ReactElement;
+  currentVisible?: boolean;
+};
+
 const SvgSteps = ({
   groups,
   children,
   currentVisible = false,
   ...props
-}: {
-  groups: GroupProps;
-  children?: React.ReactElement;
-  currentVisible?: boolean;
-}) => {
-  // const { fragment, isPresent } = useSectionContext();
+}: SvgStepsProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
     const svgElement = svgRef.current;
     if (svgElement) {
-      // Find the <g> element with id="show_2" and hide it
       Object.entries(groups).forEach(([key, value]) => {
         const groupElement = svgElement.querySelector(`#${key}`);
         if (groupElement) {
-          // groupElement.style.display = fragment >= value ? "block" : "none";
           groupElement.classList.add("fragment");
           groupElement.classList.add("appear");
           if (currentVisible) {
@@ -38,8 +37,12 @@ const SvgSteps = ({
   if (!children || !isValidElement(children)) {
     return null;
   }
-  // @ts-ignore
-  return cloneElement(children, { ref: svgRef, ...props });
+  
+  // Type assertion needed because cloneElement doesn't accept ref in its generic type
+  return cloneElement(children, {
+    ...props,
+    ref: svgRef,
+  } as Partial<React.SVGProps<SVGSVGElement>>);
 };
 
 export { SvgSteps };

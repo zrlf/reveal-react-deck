@@ -4,7 +4,7 @@ export type RevealOptions = Reveal.Options;
 
 export interface Options {
     bibFile?: string;
-    mdxComponents?: {};
+    mdxComponents?: Record<string, React.ComponentType<any>>;
     footer?: {
         left?: React.ReactNode;
         right?: React.ReactNode;
