@@ -3,7 +3,6 @@ import { useDeckStore } from "./hooks/useDeck.js";
 import { useCallback, useEffect, useRef } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Reveal from "reveal.js";
-import RevealHighlight from "reveal.js/plugin/highlight/highlight.esm";
 import mdxComponents from "./components/index.js";
 const Slides = ({ slides }) => {
     useEffect(() => {
@@ -20,7 +19,7 @@ const Slides = ({ slides }) => {
             return _jsx(SlideContent.default, {}, index);
         }) }));
 };
-function RevealSlides({ slides, options, revealOptions, plugins = [RevealHighlight], }) {
+function RevealSlides({ slides, options, revealOptions, plugins = [], }) {
     const deckDivRef = useRef(null);
     useReveal({
         options: revealOptions,

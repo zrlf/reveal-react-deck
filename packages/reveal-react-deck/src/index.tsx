@@ -47,7 +47,7 @@ function RevealSlides({
   slides,
   options,
   revealOptions,
-  plugins = [RevealHighlight],
+  plugins = [],
 }: {
   slides: SlideFile[];
   options?: Options;
